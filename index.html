@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <meta name="description" content="아이음, 마샬, 와인 커뮤니티를 잇는 차경아의 독립적인 실천.">
+  <title>CHA — Independent Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Gowun+Batang:wght@400;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="is-loading">
+  <div class="grain" aria-hidden="true"></div>
+  <svg class="scroll-flow" viewBox="0 0 1440 12000" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M1120 -120 C760 280 1280 620 880 1040 C500 1440 1080 1770 720 2200 C350 2640 920 3030 560 3480 C220 3910 780 4310 470 4780 C180 5220 720 5620 430 6120 C150 6600 760 7000 520 7520 C300 8000 940 8370 690 8920 C460 9400 1090 9800 820 10320 C590 10800 1110 11300 930 12120"></path>
+  </svg>
+  <canvas class="cursor-trail" aria-hidden="true"></canvas>
+  <div class="cursor" aria-hidden="true"><i></i><span>VIEW</span></div>
+  <div class="scroll-rail" aria-hidden="true"><i></i><span>SCROLL</span></div>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-panels"><i><span></span></i><i><span></span></i><i><span></span></i><i><span></span></i></div>
+    <div class="loader-seal"><span>CHA</span></div>
+    <p>AN INDEPENDENT PRACTICE</p>
+    <b>FORMING CONTEXT <em>00</em></b>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#top"><strong>CHA</strong><span>Independent<br>Practice</span></a>
+    <nav>
+      <a href="#practices">Practices</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="#about">About</a>
+      <button class="context-link" type="button" data-context>Send context</button>
+      <button class="menu-button magnetic" type="button" aria-expanded="false" aria-controls="menu"><i></i><i></i><span>Menu</span></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero dark-section" data-section="hero">
+      <div class="hero-sticky">
+      <div class="hero-grid line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="curve curve-a" aria-hidden="true"></div>
+      <div class="curve curve-b" aria-hidden="true"></div>
+      <p class="hero-kicker reveal-up">Three practices<br>One continuous context.</p>
+      <p class="hero-location reveal-up">Based in Seoul<br>Operating between<br>people and ideas</p>
+      <div class="hero-title hero-title-back" data-split-lines>
+        <span>CHA</span><span>KYEONG</span>
+      </div>
+      <p class="hero-byline reveal-up">An independent practice<br>by Cha Gyeong-a</p>
+      <div class="hero-material media-view"><img src="./img/ston.png" alt="히어로 중앙의 스톤 오브젝트"></div>
+      <div class="hero-title-front" data-split-lines><span>AH</span></div>
+      <figure class="hero-card hero-card-left media-view"><img src="./assets/ium-space.png" alt="아이음 프로젝트 공간"><figcaption>I. / CONNECTION</figcaption></figure>
+      <figure class="hero-card hero-card-right media-view"><img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블"><figcaption>III. / VINER</figcaption></figure>
+      <div class="hero-cta reveal-up"><span>Practice precedes identity /</span><button class="primary-button magnetic" type="button" data-context>Send Context <i>●</i></button></div>
+      </div>
+    </section>
+
+    <section class="practices dark-section" id="practices">
+      <div class="practice-sticky">
+        <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="practice-count" aria-hidden="true">3 / 3</div>
+        <div class="section-heading practice-heading" data-split-lines><span>Explore</span><strong>Practices</strong></div>
+        <p class="section-note reveal-up">Not separated by category</p>
+        <div class="practice-stage media-view">
+          <article class="practice-slide is-active" data-index="0">
+            <img src="./assets/ium-space.png" alt="아이음 프로젝트 공간">
+            <p><span>I. / EYEUM</span><b>Connection</b></p>
+          </article>
+          <article class="practice-slide" data-index="1">
+            <img src="./assets/marshall-object.png" alt="마샬 프로젝트의 소리 오브젝트">
+            <p><span>II. / MARSHALL</span><b>Taste</b></p>
+          </article>
+          <article class="practice-slide" data-index="2">
+            <img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블">
+            <p><span>III. / VINER</span><b>Community</b></p>
+          </article>
+        </div>
+        <div class="practice-caption"><b id="practiceName">아이음</b><span><i id="practiceNumber">1</i> / 3</span></div>
+        <div class="practice-dots" aria-label="프로젝트 선택">
+          <button class="is-active" data-slide="0" aria-label="아이음"></button>
+          <button data-slide="1" aria-label="마샬"></button>
+          <button data-slide="2" aria-label="와인 커뮤니티"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="thread light-section">
+      <div class="statement" data-split-lines><span>You Won’t</span><span>Find This</span><span>in One Category</span></div>
+      <div class="thread-copy reveal-up">
+        <p>세 작업은 서로 다른 이름으로 존재합니다.</p>
+        <p>아이음은 관계를 잇고, 마샬은 취향을 조율하며, 와인 커뮤니티는 그 관계가 머무를 테이블을 만듭니다. 형식은 다르지만 출발점은 같습니다. 사람 사이에 이전에는 없던 맥락을 놓는 일.</p>
+      </div>
+      <a class="line-link reveal-up" href="#connection"><span>See the connection /</span><b>Follow the thread ↘</b></a>
+      <figure class="floating-image float-a media-view"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
+      <figure class="floating-image float-b media-view"><img src="./assets/wine-table.png" alt="와인 테이블"></figure>
+      <div class="thread-curve" aria-hidden="true"></div>
+    </section>
+
+    <section class="outcomes dark-section" id="outcomes">
+      <div class="objects-sticky">
+        <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="section-heading objects-heading" data-split-lines><span>Origin</span><strong>Outcomes</strong></div>
+        <div class="objects-copy reveal-up"><p>프로젝트는 결과물로 끝나지 않습니다.</p><p>그 안에서 만들어진 언어와 관계는 원래의 이름을 떠나 다른 형태로 계속 움직입니다.</p></div>
+        <div class="object-stack media-view">
+          <figure class="object-card is-active" data-index="0"><img src="./assets/marshall-object.png" alt="마샬 소리 오브젝트"></figure>
+          <figure class="object-card" data-index="1"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
+          <figure class="object-card" data-index="2"><img src="./assets/wine-table.png" alt="와인 테이블"></figure>
+        </div>
+        <div class="object-meta"><span id="objectLabel">A signal, tuned together</span><b><i id="objectNumber">1</i> / 3</b></div>
+      </div>
+    </section>
+
+    <section class="connection light-section" id="connection">
+      <figure class="connection-media media-view reveal-clip"><img src="./assets/wine-table.png" alt="함께 마신 흔적이 남은 와인 테이블"></figure>
+      <div class="connection-title" data-split-lines><small>Connection</small><span>The Practice</span><span>Shown through</span><span>What It Leaves.</span></div>
+      <div class="connection-copy reveal-up"><p>작업과 사람은 분리되어 있지 않습니다.</p><p>아이음에서 발견한 연결, 마샬에서 조율한 취향, 와인 커뮤니티에서 이어지는 대화는 같은 실천의 서로 다른 장면입니다.</p></div>
+      <div class="connection-orbit" aria-hidden="true"></div>
+    </section>
+
+    <section class="about-gallery dark-section" id="about">
+      <div class="about-sticky">
+      <div class="about-wash" aria-hidden="true"></div>
+      <div class="about-path" aria-hidden="true"></div>
+      <div class="about-heading" data-split-lines><span>Not Everything</span><strong>Is Explained</strong><span>at Once</span></div>
+      <p class="about-kicker reveal-up">A visual index of the practice</p>
+
+      <figure class="about-tile tile-a media-view" data-label="EYEUM / Connection"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
+      <figure class="about-tile tile-b media-view" data-label="Marshall / Signal"><img src="./assets/marshall-object.png" alt="마샬 오브젝트"></figure>
+      <figure class="about-tile tile-c media-view" data-label="Viner / Gathering"><img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블"></figure>
+      <figure class="about-tile tile-d media-view" data-label="CHA / Point of view"><img src="./assets/cha-flowers.png" alt="꽃 앞에 선 차경아"></figure>
+      <figure class="about-tile tile-e media-view" data-label="EYEUM / Reflection"><img src="./assets/ium-space.png" alt="아이음 공간의 다른 장면"></figure>
+      <figure class="about-tile tile-f media-view" data-label="Marshall / Material"><img src="./assets/marshall-object.png" alt="마샬 오브젝트의 다른 장면"></figure>
+
+      <div class="about-feature media-view" aria-live="polite">
+        <figure class="about-feature-slide is-active" data-about-index="0"><img src="./assets/ium-space.png" alt="아이음 프로젝트"><figcaption>Connection / EYEUM</figcaption></figure>
+        <figure class="about-feature-slide" data-about-index="1"><img src="./assets/marshall-object.png" alt="마샬 프로젝트"><figcaption>Signal / Marshall</figcaption></figure>
+        <figure class="about-feature-slide" data-about-index="2"><img src="./assets/wine-table.png" alt="와인 커뮤니티"><figcaption>Community / Viner</figcaption></figure>
+        <figure class="about-feature-slide" data-about-index="3"><img src="./assets/cha-flowers.png" alt="차경아의 초상"><figcaption>Point of view / CHA</figcaption></figure>
+        <div class="about-controls">
+          <button id="aboutPrev" type="button" aria-label="이전 장면"><i>←</i><i>←</i></button>
+          <button id="aboutNext" type="button" aria-label="다음 장면"><i>→</i><i>→</i></button>
+        </div>
+        <span class="about-index"><i id="aboutNumber">1</i> / 4</span>
+      </div>
+      <div class="about-arch-caption" id="aboutArchCaption" aria-hidden="true">Connection / EYEUM</div>
+      <div class="about-arch-index" aria-hidden="true"><span><i id="aboutArchNumber">1</i> / 4</span></div>
+      <p class="about-copy reveal-up">하나의 작업은 하나의 이미지로 설명되지 않습니다.<br>공간, 오브젝트, 사람과 테이블 사이를 오가며<br>차경아의 실천이 하나의 장면으로 축적됩니다.</p>
+      </div>
+    </section>
+
+    <section class="updates light-section" id="updates">
+      <div class="section-heading updates-heading" data-split-lines><span>Updates</span><strong>Now Forming</strong></div>
+      <div class="update-list reveal-up">
+        <article><small>Community status</small><h3>Viner — Forming</h3><p>첫 번째 멤버 경험과 대화의 구조를 만들고 있습니다.</p><b>01</b></article>
+        <article><small>Practice archive</small><h3>EYEUM — In Reflection</h3><p>아이음에서 남은 언어와 관계를 다시 기록하고 있습니다.</p><b>02</b></article>
+        <article><small>Signal study</small><h3>Marshall — Circulating</h3><p>취향을 매개하는 오브젝트와 장면을 수집합니다.</p><b>03</b></article>
+      </div>
+    </section>
+
+    <section class="people dark-section" id="people">
+      <div class="people-marble" aria-hidden="true"></div>
+      <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="people-path path-a" aria-hidden="true"></div><div class="people-path path-b" aria-hidden="true"></div>
+      <div class="people-ghost" aria-hidden="true">People</div>
+      <div class="people-title" data-split-lines><span>Formed</span><span>by</span><strong>People</strong></div>
+      <div class="people-arch media-view reveal-arch">
+        <img src="./assets/cha-flowers.png" alt="붉은 꽃과 짙은 잎을 배경으로 선 차경아의 옆모습">
+        <span>CHA / SEOUL — 2026</span>
+      </div>
+      <div class="people-copy reveal-up"><p>세 개의 이름을 움직이는 한 사람의 시선.</p><p>아이음에서 발견한 연결, 마샬에서 조율한 취향, 와인 커뮤니티에서 이어지는 대화는 차경아라는 하나의 태도에서 시작됩니다.</p></div>
+      <p class="people-caption reveal-up">사람과 감각, 그 사이의 연결을 만듭니다.</p>
+    </section>
+
+    <section class="admission light-section" id="admission">
+      <div class="admission-ghost" aria-hidden="true">Context</div>
+      <div class="section-heading admission-heading" data-split-lines><span>Begin with</span><strong>Context</strong></div>
+      <form class="context-form reveal-up" onsubmit="return false">
+        <label><span>Full<br>Name</span><input type="text" aria-label="Full Name"><em>Your name</em></label>
+        <label><span>Email<br>Address</span><input type="email" aria-label="Email Address"><em>name@email.com</em></label>
+        <label><span>Current<br>Place</span><input type="text" aria-label="Current Place"><em>Seoul / Elsewhere</em></label>
+        <label class="wide"><span>Context for<br>Conversation /</span><textarea aria-label="Context for Conversation"></textarea><em>I’m building, questioning, or looking for…</em></label>
+        <label class="agree"><input type="checkbox"><span>이 대화는 서로의 맥락을 확인한 뒤 천천히 시작될 수 있다는 것을 이해합니다.</span></label>
+        <button class="submit magnetic" type="submit">Send Context <i>↗</i></button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>No forced social presence</p>
+    <h2>Independent practice<br>operating across contexts.</h2>
+    <nav><a href="#practices">Practices</a><a href="#outcomes">Outcomes</a><a href="#connection">About</a><a href="mailto:hello@example.com">Contact</a></nav>
+    <small>아이음 · 마샬 · 와인 커뮤니티를 잇는 개인적 실천.</small><span>© 2026</span>
+  </footer>
+
+  <aside class="menu-overlay" id="menu" aria-hidden="true">
+    <div class="menu-top"><span>CHA / Navigation</span><button class="menu-close" type="button">Close ×</button></div>
+    <nav>
+      <a href="#practices"><small>01</small><span>Practices</span></a>
+      <a href="#outcomes"><small>02</small><span>Outcomes</span></a>
+      <a href="#connection"><small>03</small><span>Connection</span></a>
+      <a href="#about"><small>04</small><span>About</span></a>
+      <a href="#people"><small>05</small><span>People</span></a>
+      <a href="#admission"><small>06</small><span>Context</span></a>
+    </nav>
+    <div class="menu-foot"><span>Seoul / Elsewhere</span><span>Independent Practice</span></div>
+  </aside>
+  <script src="./script.js"></script>
+</body>
+</html>
