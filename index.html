@@ -1,211 +1,397 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=1440">
-  <meta name="description" content="아이음, 마샬, 와인 커뮤니티를 잇는 차경아의 독립적인 실천.">
-  <title>CHA — Independent Practice</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Gowun+Batang:wght@400;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Obsidian Assembly</title>
+<meta name="description" content="The Obsidian Assembly is an independent organization coordinating distributed spaces, operations, and product development across multiple locations.">
+<meta name="theme-color" content="#151415">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
-<body class="is-loading">
-  <div class="grain" aria-hidden="true"></div>
-  <svg class="scroll-flow" viewBox="0 0 1440 12000" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M1120 -120 C760 280 1280 620 880 1040 C500 1440 1080 1770 720 2200 C350 2640 920 3030 560 3480 C220 3910 780 4310 470 4780 C180 5220 720 5620 430 6120 C150 6600 760 7000 520 7520 C300 8000 940 8370 690 8920 C460 9400 1090 9800 820 10320 C590 10800 1110 11300 930 12120"></path>
-  </svg>
-  <canvas class="cursor-trail" aria-hidden="true"></canvas>
-  <div class="cursor" aria-hidden="true"><i></i><span>VIEW</span></div>
-  <div class="scroll-rail" aria-hidden="true"><i></i><span>SCROLL</span></div>
+<body>
 
-  <div class="loader" aria-hidden="true">
-    <div class="loader-panels"><i><span></span></i><i><span></span></i><i><span></span></i><i><span></span></i></div>
-    <div class="loader-seal"><span>CHA</span></div>
-    <p>AN INDEPENDENT PRACTICE</p>
-    <b>FORMING CONTEXT <em>00</em></b>
+<!-- Cursor -->
+<canvas class="cursor-trail" id="cursorTrail" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <img class="preloader__label" src="./img/CHA-KYEONG-AH-logo.png?v=2" alt="CHA KYEONG AH">
+  <span class="preloader__panel preloader__panel--1" aria-hidden="true"></span>
+  <span class="preloader__panel preloader__panel--2" aria-hidden="true"></span>
+  <span class="preloader__panel preloader__panel--3" aria-hidden="true"></span>
+  <span class="preloader__panel preloader__panel--4" aria-hidden="true"></span>
+</div>
+
+<!-- Header -->
+<header class="site-header" id="siteHeader">
+  <a href="#top" class="logo">
+    <img class="logo__image" src="./img/CHA-KYEONG-AH-logo.png?v=2" alt="CHA KYEONG AH">
+  </a>
+  <nav class="header-nav">
+    <a href="#places">Places</a>
+    <span class="header-nav__sep"></span>
+    <a href="#objects">Objects</a>
+  </nav>
+  <div class="header-right">
+    <a href="#admission" class="header-request">send request</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu 열기">
+      <span class="menu-toggle__icon"><i></i><i></i></span>
+      <span class="menu-toggle__label">Menu</span>
+    </button>
   </div>
+</header>
 
-  <header class="site-header">
-    <a class="brand" href="#top"><strong>CHA</strong><span>Independent<br>Practice</span></a>
-    <nav>
-      <a href="#practices">Practices</a>
-      <a href="#outcomes">Outcomes</a>
-      <a href="#about">About</a>
-      <button class="context-link" type="button" data-context>Send context</button>
-      <button class="menu-button magnetic" type="button" aria-expanded="false" aria-controls="menu"><i></i><i></i><span>Menu</span></button>
+<!-- Fullscreen Menu Overlay -->
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose">Close</button>
+  <button class="menu-x" id="menuX" aria-label="닫기">&times;</button>
+  <div class="menu-overlay__body">
+    <div class="menu-overlay__badge">
+      <span class="menu-overlay__icon">&#129418;</span>
+      <span>Navigation</span>
+    </div>
+    <nav class="menu-overlay__nav">
+      <a href="#places" class="mnav mnav--1">Places</a>
+      <a href="#objects" class="mnav mnav--2">Objects</a>
+      <a href="#" class="mnav mnav--3 disabled">About</a>
+      <a href="#admission" class="mnav mnav--4">Contacts</a>
+      <a href="#people" class="mnav mnav--5">People</a>
     </nav>
-  </header>
+  </div>
+</div>
 
-  <main id="top">
-    <section class="hero dark-section" data-section="hero">
-      <div class="hero-sticky">
-      <div class="hero-grid line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="curve curve-a" aria-hidden="true"></div>
-      <div class="curve curve-b" aria-hidden="true"></div>
-      <p class="hero-kicker reveal-up">Three practices<br>One continuous context.</p>
-      <p class="hero-location reveal-up">Based in Seoul<br>Operating between<br>people and ideas</p>
-      <div class="hero-title hero-title-back" data-split-lines>
-        <span>CHA</span><span>KYEONG</span>
-      </div>
-      <p class="hero-byline reveal-up">An independent practice<br>by Cha Gyeong-a</p>
-      <div class="hero-material media-view"><img src="./img/ston.png" alt="히어로 중앙의 스톤 오브젝트"></div>
-      <div class="hero-title-front" data-split-lines><span>AH</span></div>
-      <figure class="hero-card hero-card-left media-view"><img src="./assets/ium-space.png" alt="아이음 프로젝트 공간"><figcaption>I. / CONNECTION</figcaption></figure>
-      <figure class="hero-card hero-card-right media-view"><img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블"><figcaption>III. / VINER</figcaption></figure>
-      <div class="hero-cta reveal-up"><span>Practice precedes identity /</span><button class="primary-button magnetic" type="button" data-context>Send Context <i>●</i></button></div>
-      </div>
-    </section>
+<main id="top">
 
-    <section class="practices dark-section" id="practices">
-      <div class="practice-sticky">
-        <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="practice-count" aria-hidden="true">3 / 3</div>
-        <div class="section-heading practice-heading" data-split-lines><span>Explore</span><strong>Practices</strong></div>
-        <p class="section-note reveal-up">Not separated by category</p>
-        <div class="practice-stage media-view">
-          <article class="practice-slide is-active" data-index="0">
-            <img src="./assets/ium-space.png" alt="아이음 프로젝트 공간">
-            <p><span>I. / EYEUM</span><b>Connection</b></p>
-          </article>
-          <article class="practice-slide" data-index="1">
-            <img src="./assets/marshall-object.png" alt="마샬 프로젝트의 소리 오브젝트">
-            <p><span>II. / MARSHALL</span><b>Taste</b></p>
-          </article>
-          <article class="practice-slide" data-index="2">
-            <img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블">
-            <p><span>III. / VINER</span><b>Community</b></p>
-          </article>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <span class="hero__coordinates"><span>Coordinates</span><span>Withheld</span></span>
+    <span class="hero__caption hero__caption--left">A Private Assembly<br>for Makers</span>
+
+    <h1 class="hero__title">
+      <span class="line">CHA</span>
+      <span class="line">KYEONG</span>
+      <span class="line">AH</span>
+    </h1>
+
+    <figure class="hero__photo hero__photo--left">
+      <img src="img/EYEUM.png?v=2" alt="EYEUM" loading="eager">
+      <span>P.</span>
+    </figure>
+    <figure class="hero__photo hero__photo--left-back">
+      <img src="img/AI Money Coach.png?v=2" alt="AI Money Coach" loading="eager">
+      <span>P.</span>
+    </figure>
+    <figure class="hero__photo hero__photo--right">
+      <img src="img/marshall_rebrand.png" alt="Marshall Rebrand" loading="eager">
+      <span>I.</span>
+    </figure>
+    <figure class="hero__photo hero__photo--right-back">
+      <img src="img/wine.png" alt="Wine" loading="eager">
+      <span>I.</span>
+    </figure>
+
+    <div class="hero__stone">
+      <img src="images/home/ston.png" alt="Obsidian stone" loading="eager">
+    </div>
+
+    <div class="hero__actions">
+      <span class="hero__note">Commitment<br>Precedes<br>Entry /</span>
+      <a href="#admission" class="btn btn--ghost">Seek Admission</a>
+    </div>
+    <span class="hero__bottom-tag">Imagine Possible</span>
+  </section>
+
+  <!-- Background-only breathing space -->
+  <div class="hero-places-spacer" aria-hidden="true"></div>
+
+  <!-- Places -->
+  <section class="section places" id="places">
+    <div class="scroll-pin" id="placesScroll" style="--slides:3">
+      <div class="scroll-pin__sticky">
+        <div class="section__head reveal">
+          <span class="eyebrow">Explore&nbsp;Places</span>
+          <h2 class="section__title">Still Becoming,<br>Still Me</h2>
         </div>
-        <div class="practice-caption"><b id="practiceName">아이음</b><span><i id="practiceNumber">1</i> / 3</span></div>
-        <div class="practice-dots" aria-label="프로젝트 선택">
-          <button class="is-active" data-slide="0" aria-label="아이음"></button>
-          <button data-slide="1" aria-label="마샬"></button>
-          <button data-slide="2" aria-label="와인 커뮤니티"></button>
+        <div class="places__gallery-surround" aria-hidden="true">
+          <figure class="places__ambient places__ambient--left-top">
+            <img src="images/offices/6.webp" alt="" loading="lazy">
+          </figure>
+          <figure class="places__ambient places__ambient--left-bottom">
+            <img src="images/offices/2.webp" alt="" loading="lazy">
+          </figure>
+          <figure class="places__ambient places__ambient--top">
+            <img src="images/offices/7.webp" alt="" loading="lazy">
+          </figure>
+          <figure class="places__ambient places__ambient--right-top">
+            <img src="images/offices/3.webp" alt="" loading="lazy">
+          </figure>
+          <figure class="places__ambient places__ambient--right-bottom">
+            <img src="images/offices/4.webp" alt="" loading="lazy">
+          </figure>
+          <figure class="places__ambient places__ambient--bottom">
+            <img src="images/offices/5.webp" alt="" loading="lazy">
+          </figure>
+        </div>
+        <div class="places__carousel">
+          <div class="places__slides" id="placeSlides">
+            <figure class="places__slide is-active places__slide--reveal">
+              <img class="places__slide-cover" src="img/CHA.PNG" alt="Place 01">
+              <img class="places__slide-original" src="img/CHA.PNG" alt="" aria-hidden="true">
+            </figure>
+            <figure class="places__slide places__slide--reveal">
+              <img class="places__slide-cover" src="img/CHA2.png" alt="Place 02">
+              <img class="places__slide-original" src="img/CHA2.png" alt="" aria-hidden="true">
+            </figure>
+            <figure class="places__slide places__slide--reveal">
+              <img class="places__slide-cover" src="img/CHA3.png" alt="Place 03">
+              <img class="places__slide-original" src="img/CHA3.png" alt="" aria-hidden="true">
+            </figure>
+          </div>
+        </div>
+        <div class="places__statement" id="placesStatement">
+          <p>편집디자인 수업에서 처음 웹페이지를 만들어보면서, 화면 하나를 구성하는 일에 재미를 느꼈어요. 그 흥미를 따라 웹디자인을 계속 찾아보다가 UX/UI라는 분야를 알게 됐고, 자연스럽게 관심을 갖게 됐습니다.</p>
+          <p>일을 시작할 때는 항상 전체 흐름을 먼저 봐요. 그리고 UX를 설계할 때는 사용자가 가장 불편하게 느끼는 지점이 어디인지부터 찾습니다. 그 지점을 찾고 나면, AI를 최대한 활용해서 더 편안하고 안정적으로 느껴지는 화면으로 풀어내는 게 제 작업 방식이에요.</p>
+          <p>최근에는 AI로 원하는 인터랙션을 직접 구현해볼 수 있다는 점에 특히 흥미를 느끼고 있어서, 디자인과 구현을 함께 다루는 방향으로 관심을 넓혀가는 중입니다.</p>
+        </div>
+        <span class="imagine-tag">Imagine Possible</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Places statement -->
+  <section class="section places-after" id="places-after">
+    <img class="places-after__map" src="img/sketch1.png" alt="" aria-hidden="true">
+    <div class="places-after__head reveal">
+      <h2 class="section__title">
+        <span>You Won&rsquo;t</span>
+        <span>Find Them</span>
+        <span>on a Map</span>
+      </h2>
+    </div>
+
+    <div class="places-after__body reveal">
+      <p class="places-after__lede">These places aren&rsquo;t broadly announced.</p>
+      <p class="places-after__text">There are <span class="places-after__num">7</span> in operation at the moment,
+         each established within a specific context and maintained with discretion. Their
+         presence is intentional, shaped by location rather than visibility. Access is considered,
+         not assumed.</p>
+    </div>
+
+    <div class="places-after__actions reveal">
+      <span class="hero__note">See if<br>Nearby /</span>
+      <a href="#admission" class="btn btn--ghost">Seek Admission</a>
+    </div>
+    <img class="places-after__stone" src="images/home/stone-2.webp" alt="" aria-hidden="true">
+    <span class="imagine-tag">Imagine Possible</span>
+  </section>
+
+  <!-- Origin Objects -->
+  <section class="section objects" id="objects">
+    <img class="objects__bg" src="images/home/original-objects-bg.webp" alt="" aria-hidden="true">
+    <div class="section__head reveal">
+      <span class="eyebrow">Origin&nbsp;Objects</span>
+      <h2 class="section__title">These items are formed<br>within the places themselves.</h2>
+      <p class="section__lede">Each originates on site, shaped by material, process, and circumstance.
+         Once completed, they leave their point of origin and circulate independently.</p>
+      <a href="https://obsidianassembly.com/objects" class="link-underline" target="_blank" rel="noopener">Explore Objects</a>
+    </div>
+
+    <div class="scroll-pin" id="objectsScroll" style="--slides:14">
+      <div class="scroll-pin__sticky">
+        <h2 class="objects__portfolio-title" aria-label="Portfolio">
+          <span class="objects__portfolio-word objects__portfolio-word--left" aria-hidden="true">PORT</span><span class="objects__portfolio-word objects__portfolio-word--right" aria-hidden="true">FOLIO</span>
+        </h2>
+        <div class="objects__carousel reveal">
+          <div class="objects__slides" id="objectSlides">
+            <figure class="objects__slide is-active">
+              <img src="img/wine.png" alt="Wine">
+              <figcaption class="objects__slide-caption"><strong>VINER</strong><span>(팀프로젝트)</span></figcaption>
+            </figure>
+            <figure class="objects__slide">
+              <img src="img/AI Money Coach.png?v=2" alt="AI Money Coach">
+              <figcaption class="objects__slide-caption"><strong>AI IN_APP</strong><span>(AI 활용한 IN_APP)</span></figcaption>
+            </figure>
+            <figure class="objects__slide">
+              <img src="img/EYEUM.png?v=2" alt="EYEUM">
+              <figcaption class="objects__slide-caption"><strong>EYEUM</strong><span>(개인프로젝트)</span></figcaption>
+            </figure>
+            <figure class="objects__slide">
+              <img src="img/marshall_rebrand.png" alt="Marshall Rebrand">
+              <figcaption class="objects__slide-caption"><strong>MARSHALL</strong><span>(팀프로젝트)</span></figcaption>
+            </figure>
+          </div>
+          <div class="objects__meta">
+            <span>(V) The Fox Spirit</span>
+            <span id="objectCount">1 / 4</span>
+          </div>
+          <button class="objects__nav objects__nav--prev" id="objPrev" aria-label="이전">‹</button>
+          <button class="objects__nav objects__nav--next" id="objNext" aria-label="다음">›</button>
+        </div>
+        <svg class="objects__butterfly-path" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+          <linearGradient id="objectsButterflyGradient" x1="0" y1="0.5" x2="1" y2="0.5">
+            <stop offset="0" stop-color="#C6A76A" stop-opacity="0"></stop>
+            <stop offset="0.5" stop-color="#9C7A6B" stop-opacity=".5"></stop>
+            <stop offset="1" stop-color="#8C9490" stop-opacity="0"></stop>
+          </linearGradient>
+          <path fill="none" stroke="url(#objectsButterflyGradient)" stroke-width="1" vector-effect="non-scaling-stroke" d="M451.13 533.21C158.93 219.87-342.26 1069.71 346.16 682.37 1034.59 295.03 858.7 36.03 251.6 377.12-355.5 718.21 1249.25 214.09 912.6 526.28 575.95 838.46-299.71 26.78 408.58 409.5 1116.86 792.21 160.82 1171.46 244.98 660.4 329.14 149.34 921.11-105.03 719.69 273.06 518.27 651.15-32.09 1155.27 128.67 653.46 289.43 151.65 801.96 230.28 961.78 624.56 1121.59 1018.84 743.33 846.56 451.13 533.21Z"></path>
+        </svg>
+        <div class="objects__merge-details">
+          <p class="objects__merge-copy objects__merge-copy--left-top">These items are formed within<br>the places themselves.</p>
+          <p class="objects__merge-copy objects__merge-copy--right">Each originates on site, shaped<br>by material, process, and<br>circumstance.</p>
+          <p class="objects__merge-copy objects__merge-copy--left-bottom">Once completed, they leave<br>their point of origin and circulate<br>independently.</p>
+          <div class="objects__merge-name"><span id="objectMergeName">(V) The Fox Spirit</span></div>
+          <span class="objects__merge-count" id="objectMergeCount">1/4</span>
+          <a class="objects__merge-link" href="https://obsidianassembly.com/objects" target="_blank" rel="noopener">
+            <span>Explore Objects</span><i aria-hidden="true"></i>
+          </a>
+        </div>
+        <span class="imagine-tag">Imagine Possible</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connection -->
+  <section class="section connection reveal">
+    <div class="connection__media">
+      <img src="images/offices/1.webp" alt="Staircase interior">
+      <img src="images/offices/2.webp" alt="Living room interior">
+    </div>
+    <span class="connection__giant">Connection</span>
+    <div class="connection__text">
+      <span class="connection__the">The</span>
+      <h2 class="section__title">Item Shown<br>at Point<br>of Origin.</h2>
+    </div>
+    <div class="connection__paras">
+      <p>Places and Items are not separate. Each item originates within a
+         specific place, shaped by its conditions, materials, and use.</p>
+      <p>Once removed, the item continues independently, carrying its point of origin
+         without representing it directly.</p>
+    </div>
+    <span class="imagine-tag">Imagine Possible</span>
+  </section>
+
+  <!-- Updates -->
+  <section class="section updates" id="updates">
+    <span class="updates__giant">Updates</span>
+    <div class="section__head reveal">
+      <h2 class="section__title">Now Forming</h2>
+    </div>
+
+    <div class="updates__grid reveal">
+      <figure class="updates__card"><img src="images/home/updates/1.webp" alt=""></figure>
+      <figure class="updates__card updates__card--main"><img src="images/home/updates/2.webp" alt=""></figure>
+      <figure class="updates__card"><img src="images/home/updates/3.webp" alt=""></figure>
+    </div>
+
+    <div class="updates__info reveal">
+      <div class="updates__col">
+        <span class="updates__tag">Place status</span>
+        <span class="updates__headline">Lower Hall &ndash; Operational</span>
+        <p>Lower Hall has entered active operation and is now maintained on a regular cycle.</p>
+      </div>
+      <div class="updates__col updates__col--main">
+        <span class="updates__tag">Item release</span>
+        <span class="updates__headline">Item II &ndash; In Circulation</span>
+        <p>Item 02 has been released externally and is now circulating beyond its point of origin.</p>
+      </div>
+      <div class="updates__col">
+        <span class="updates__tag">Formation / Process</span>
+        <span class="updates__headline">Interior V &ndash; Forming</span>
+        <p>Work continues on Interior 05. Conditions are being refined prior to use.</p>
+      </div>
+    </div>
+
+    <ol class="updates__pager reveal" id="updatesList">
+      <li class="is-active" data-img="images/home/updates/1.webp" data-tag="Place status" data-headline="Lower Hall &ndash; Operational" data-text="Lower Hall has entered active operation and is now maintained on a regular cycle.">1</li>
+      <li data-img="images/home/updates/2.webp" data-tag="Item release" data-headline="Item II &ndash; In Circulation" data-text="Item 02 has been released externally and is now circulating beyond its point of origin.">2</li>
+      <li data-img="images/home/updates/3.webp" data-tag="Formation / Process" data-headline="Interior V &ndash; Forming" data-text="Work continues on Interior 05. Conditions are being refined prior to use.">3</li>
+      <li data-img="images/home/updates/4.webp" data-tag="Admission" data-headline="Cycle IV &ndash; Reviewing" data-text="Recent submissions are under review. Responses follow no fixed schedule.">4</li>
+      <li data-img="images/home/updates/5.webp" data-tag="Object study" data-headline="Fragment 09 &ndash; Archived" data-text="A record of the process has been kept for internal reference only.">5</li>
+    </ol>
+  </section>
+
+  <!-- People -->
+  <section class="section people" id="people">
+    <div class="section__head reveal">
+      <span class="eyebrow">Formed by</span>
+      <h2 class="section__title">People&hellip;</h2>
+    </div>
+    <span class="people__giant">People</span>
+    <span class="imagine-tag imagine-tag--mid">Imagine Possible</span>
+    <figure class="people__arch reveal">
+      <img class="people__arch-bg" src="images/home/people-wall.webp" alt="">
+      <img class="people__arch-fg" src="images/home/people-silhouette.webp" alt="Member silhouette">
+    </figure>
+    <p class="people__text reveal">These places and items are shaped by a small group of people working
+       across locations and disciplines.</p>
+  </section>
+
+  <!-- Admission -->
+  <section class="section admission" id="admission">
+    <img class="admission__bg" src="images/main/admission-2.webp" alt="" aria-hidden="true">
+    <div class="section__head reveal">
+      <span class="eyebrow">Admission</span>
+    </div>
+    <form class="admission__form reveal" id="admissionForm">
+      <div class="field">
+        <label for="fullName">Full<br>Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Nick Harrison" required>
+      </div>
+      <div class="field">
+        <label for="email">Email<br>Address</label>
+        <input type="email" id="email" name="email" placeholder="nick-h@gmail.com" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" placeholder="Switzerland">
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="Basel">
         </div>
       </div>
-    </section>
-
-    <section class="thread light-section">
-      <div class="statement" data-split-lines><span>You Won’t</span><span>Find This</span><span>in One Category</span></div>
-      <div class="thread-copy reveal-up">
-        <p>세 작업은 서로 다른 이름으로 존재합니다.</p>
-        <p>아이음은 관계를 잇고, 마샬은 취향을 조율하며, 와인 커뮤니티는 그 관계가 머무를 테이블을 만듭니다. 형식은 다르지만 출발점은 같습니다. 사람 사이에 이전에는 없던 맥락을 놓는 일.</p>
+      <div class="field">
+        <label for="context">Context for<br>Admission /</label>
+        <textarea id="context" name="context" rows="3" placeholder="I am an Artist, leaving in&hellip;"></textarea>
       </div>
-      <a class="line-link reveal-up" href="#connection"><span>See the connection /</span><b>Follow the thread ↘</b></a>
-      <figure class="floating-image float-a media-view"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
-      <figure class="floating-image float-b media-view"><img src="./assets/wine-table.png" alt="와인 테이블"></figure>
-      <div class="thread-curve" aria-hidden="true"></div>
-    </section>
+      <label class="admission__check">
+        <input type="checkbox" required>
+        <span>I understand that admission is reviewed selectively and responses may
+         take time.</span>
+      </label>
+      <a href="https://obsidianassembly.com/imagine-possible-policy" class="link-underline" target="_blank" rel="noopener">Read ImaginePossible Policy</a>
+      <button type="submit" class="btn btn--solid">Submit Admission</button>
+      <p class="admission__success" id="admissionSuccess" role="status">Received. Responses are not guaranteed.</p>
+    </form>
+  </section>
 
-    <section class="outcomes dark-section" id="outcomes">
-      <div class="objects-sticky">
-        <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="section-heading objects-heading" data-split-lines><span>Origin</span><strong>Outcomes</strong></div>
-        <div class="objects-copy reveal-up"><p>프로젝트는 결과물로 끝나지 않습니다.</p><p>그 안에서 만들어진 언어와 관계는 원래의 이름을 떠나 다른 형태로 계속 움직입니다.</p></div>
-        <div class="object-stack media-view">
-          <figure class="object-card is-active" data-index="0"><img src="./assets/marshall-object.png" alt="마샬 소리 오브젝트"></figure>
-          <figure class="object-card" data-index="1"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
-          <figure class="object-card" data-index="2"><img src="./assets/wine-table.png" alt="와인 테이블"></figure>
-        </div>
-        <div class="object-meta"><span id="objectLabel">A signal, tuned together</span><b><i id="objectNumber">1</i> / 3</b></div>
-      </div>
-    </section>
+</main>
 
-    <section class="connection light-section" id="connection">
-      <figure class="connection-media media-view reveal-clip"><img src="./assets/wine-table.png" alt="함께 마신 흔적이 남은 와인 테이블"></figure>
-      <div class="connection-title" data-split-lines><small>Connection</small><span>The Practice</span><span>Shown through</span><span>What It Leaves.</span></div>
-      <div class="connection-copy reveal-up"><p>작업과 사람은 분리되어 있지 않습니다.</p><p>아이음에서 발견한 연결, 마샬에서 조율한 취향, 와인 커뮤니티에서 이어지는 대화는 같은 실천의 서로 다른 장면입니다.</p></div>
-      <div class="connection-orbit" aria-hidden="true"></div>
-    </section>
-
-    <section class="about-gallery dark-section" id="about">
-      <div class="about-sticky">
-      <div class="about-wash" aria-hidden="true"></div>
-      <div class="about-path" aria-hidden="true"></div>
-      <div class="about-heading" data-split-lines><span>Not Everything</span><strong>Is Explained</strong><span>at Once</span></div>
-      <p class="about-kicker reveal-up">A visual index of the practice</p>
-
-      <figure class="about-tile tile-a media-view" data-label="EYEUM / Connection"><img src="./assets/ium-space.png" alt="아이음 공간"></figure>
-      <figure class="about-tile tile-b media-view" data-label="Marshall / Signal"><img src="./assets/marshall-object.png" alt="마샬 오브젝트"></figure>
-      <figure class="about-tile tile-c media-view" data-label="Viner / Gathering"><img src="./assets/wine-table.png" alt="와인 커뮤니티 테이블"></figure>
-      <figure class="about-tile tile-d media-view" data-label="CHA / Point of view"><img src="./assets/cha-flowers.png" alt="꽃 앞에 선 차경아"></figure>
-      <figure class="about-tile tile-e media-view" data-label="EYEUM / Reflection"><img src="./assets/ium-space.png" alt="아이음 공간의 다른 장면"></figure>
-      <figure class="about-tile tile-f media-view" data-label="Marshall / Material"><img src="./assets/marshall-object.png" alt="마샬 오브젝트의 다른 장면"></figure>
-
-      <div class="about-feature media-view" aria-live="polite">
-        <figure class="about-feature-slide is-active" data-about-index="0"><img src="./assets/ium-space.png" alt="아이음 프로젝트"><figcaption>Connection / EYEUM</figcaption></figure>
-        <figure class="about-feature-slide" data-about-index="1"><img src="./assets/marshall-object.png" alt="마샬 프로젝트"><figcaption>Signal / Marshall</figcaption></figure>
-        <figure class="about-feature-slide" data-about-index="2"><img src="./assets/wine-table.png" alt="와인 커뮤니티"><figcaption>Community / Viner</figcaption></figure>
-        <figure class="about-feature-slide" data-about-index="3"><img src="./assets/cha-flowers.png" alt="차경아의 초상"><figcaption>Point of view / CHA</figcaption></figure>
-        <div class="about-controls">
-          <button id="aboutPrev" type="button" aria-label="이전 장면"><i>←</i><i>←</i></button>
-          <button id="aboutNext" type="button" aria-label="다음 장면"><i>→</i><i>→</i></button>
-        </div>
-        <span class="about-index"><i id="aboutNumber">1</i> / 4</span>
-      </div>
-      <div class="about-arch-caption" id="aboutArchCaption" aria-hidden="true">Connection / EYEUM</div>
-      <div class="about-arch-index" aria-hidden="true"><span><i id="aboutArchNumber">1</i> / 4</span></div>
-      <p class="about-copy reveal-up">하나의 작업은 하나의 이미지로 설명되지 않습니다.<br>공간, 오브젝트, 사람과 테이블 사이를 오가며<br>차경아의 실천이 하나의 장면으로 축적됩니다.</p>
-      </div>
-    </section>
-
-    <section class="updates light-section" id="updates">
-      <div class="section-heading updates-heading" data-split-lines><span>Updates</span><strong>Now Forming</strong></div>
-      <div class="update-list reveal-up">
-        <article><small>Community status</small><h3>Viner — Forming</h3><p>첫 번째 멤버 경험과 대화의 구조를 만들고 있습니다.</p><b>01</b></article>
-        <article><small>Practice archive</small><h3>EYEUM — In Reflection</h3><p>아이음에서 남은 언어와 관계를 다시 기록하고 있습니다.</p><b>02</b></article>
-        <article><small>Signal study</small><h3>Marshall — Circulating</h3><p>취향을 매개하는 오브젝트와 장면을 수집합니다.</p><b>03</b></article>
-      </div>
-    </section>
-
-    <section class="people dark-section" id="people">
-      <div class="people-marble" aria-hidden="true"></div>
-      <div class="line-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="people-path path-a" aria-hidden="true"></div><div class="people-path path-b" aria-hidden="true"></div>
-      <div class="people-ghost" aria-hidden="true">People</div>
-      <div class="people-title" data-split-lines><span>Formed</span><span>by</span><strong>People</strong></div>
-      <div class="people-arch media-view reveal-arch">
-        <img src="./assets/cha-flowers.png" alt="붉은 꽃과 짙은 잎을 배경으로 선 차경아의 옆모습">
-        <span>CHA / SEOUL — 2026</span>
-      </div>
-      <div class="people-copy reveal-up"><p>세 개의 이름을 움직이는 한 사람의 시선.</p><p>아이음에서 발견한 연결, 마샬에서 조율한 취향, 와인 커뮤니티에서 이어지는 대화는 차경아라는 하나의 태도에서 시작됩니다.</p></div>
-      <p class="people-caption reveal-up">사람과 감각, 그 사이의 연결을 만듭니다.</p>
-    </section>
-
-    <section class="admission light-section" id="admission">
-      <div class="admission-ghost" aria-hidden="true">Context</div>
-      <div class="section-heading admission-heading" data-split-lines><span>Begin with</span><strong>Context</strong></div>
-      <form class="context-form reveal-up" onsubmit="return false">
-        <label><span>Full<br>Name</span><input type="text" aria-label="Full Name"><em>Your name</em></label>
-        <label><span>Email<br>Address</span><input type="email" aria-label="Email Address"><em>name@email.com</em></label>
-        <label><span>Current<br>Place</span><input type="text" aria-label="Current Place"><em>Seoul / Elsewhere</em></label>
-        <label class="wide"><span>Context for<br>Conversation /</span><textarea aria-label="Context for Conversation"></textarea><em>I’m building, questioning, or looking for…</em></label>
-        <label class="agree"><input type="checkbox"><span>이 대화는 서로의 맥락을 확인한 뒤 천천히 시작될 수 있다는 것을 이해합니다.</span></label>
-        <button class="submit magnetic" type="submit">Send Context <i>↗</i></button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>No forced social presence</p>
-    <h2>Independent practice<br>operating across contexts.</h2>
-    <nav><a href="#practices">Practices</a><a href="#outcomes">Outcomes</a><a href="#connection">About</a><a href="mailto:hello@example.com">Contact</a></nav>
-    <small>아이음 · 마샬 · 와인 커뮤니티를 잇는 개인적 실천.</small><span>© 2026</span>
-  </footer>
-
-  <aside class="menu-overlay" id="menu" aria-hidden="true">
-    <div class="menu-top"><span>CHA / Navigation</span><button class="menu-close" type="button">Close ×</button></div>
-    <nav>
-      <a href="#practices"><small>01</small><span>Practices</span></a>
-      <a href="#outcomes"><small>02</small><span>Outcomes</span></a>
-      <a href="#connection"><small>03</small><span>Connection</span></a>
-      <a href="#about"><small>04</small><span>About</span></a>
-      <a href="#people"><small>05</small><span>People</span></a>
-      <a href="#admission"><small>06</small><span>Context</span></a>
+<!-- Footer -->
+<footer class="site-footer">
+  <span class="site-footer__no-social">No Social Medias</span>
+  <div class="site-footer__mountain"></div>
+  <div class="site-footer__card">
+    <span class="site-footer__desc">Independent practice<br>operating across<br>locations.</span>
+    <nav class="site-footer__nav">
+      <a href="#places" class="fnav fnav--1"><i>+</i>Places</a>
+      <a href="#objects" class="fnav fnav--2"><i>+</i>Objects</a>
+      <a href="#" class="fnav fnav--3 disabled"><i>+</i>About</a>
+      <a href="#admission" class="fnav fnav--4"><i>+</i>Contacts</a>
+      <a href="#people" class="fnav fnav--5"><i>+</i>People</a>
     </nav>
-    <div class="menu-foot"><span>Seoul / Elsewhere</span><span>Independent Practice</span></div>
-  </aside>
-  <script src="./script.js"></script>
+    <span class="site-footer__op">Operating<br>Across<br>Locations.</span>
+    <div class="site-footer__bottom">
+      <span>&copy; 2026</span>
+      <span>This website is an expression of the ImaginePossible initiative.</span>
+      <a href="https://fiddle.digital" target="_blank" rel="noopener" class="link-underline">Website by Fiddle.Digital</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js?v=8"></script>
 </body>
 </html>

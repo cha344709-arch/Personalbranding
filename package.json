@@ -1,9 +1,0 @@
-{
-  "name": "cha-personal-practice",
-  "private": true,
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "python3 -m http.server 4174",
-    "start": "python3 -m http.server 4174"
-  }
-}
