@@ -6,7 +6,7 @@
 <title>The Obsidian Assembly</title>
 <meta name="description" content="The Obsidian Assembly is an independent organization coordinating distributed spaces, operations, and product development across multiple locations.">
 <meta name="theme-color" content="#151415">
-<link rel="stylesheet" href="style.css?v=29">
+<link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
 
@@ -136,16 +136,16 @@
         <div class="places__carousel">
           <div class="places__slides" id="placeSlides">
             <figure class="places__slide is-active places__slide--reveal">
-              <img class="places__slide-cover" src="img/CHA.PNG" alt="Place 01">
-              <img class="places__slide-original" src="img/CHA.PNG" alt="" aria-hidden="true">
+              <img class="places__slide-cover" src="img/CHA.jpg" alt="Place 01">
+              <img class="places__slide-original" src="img/CHA.jpg" alt="" aria-hidden="true">
             </figure>
             <figure class="places__slide places__slide--reveal">
-              <img class="places__slide-cover" src="img/CHA2.png" alt="Place 02">
-              <img class="places__slide-original" src="img/CHA2.png" alt="" aria-hidden="true">
+              <img class="places__slide-cover" src="img/CHA2.jpg" alt="Place 02">
+              <img class="places__slide-original" src="img/CHA2.jpg" alt="" aria-hidden="true">
             </figure>
             <figure class="places__slide places__slide--reveal">
-              <img class="places__slide-cover" src="img/CHA3.png" alt="Place 03">
-              <img class="places__slide-original" src="img/CHA3.png" alt="" aria-hidden="true">
+              <img class="places__slide-cover" src="img/CHA3.jpg" alt="Place 03">
+              <img class="places__slide-original" src="img/CHA3.jpg" alt="" aria-hidden="true">
             </figure>
           </div>
         </div>
@@ -375,8 +375,23 @@
   </div>
 </footer>
 
-<img class="fairy-chatbot" src="img/chatbot.png" alt="" aria-hidden="true">
+<div class="fairy-chatbot" id="fairyChatbot" role="button" tabindex="0" aria-label="경아에게 물어보기">
+  <div class="fairy-chatbot__shape"></div>
+</div>
 
-<script src="script.js?v=8"></script>
+<div class="fairy-chat" id="fairyChat" aria-hidden="true">
+  <div class="fairy-chat__header">
+    <span class="fairy-chat__title">ASK KYEONG&nbsp;AH</span>
+    <button type="button" class="fairy-chat__close" id="fairyChatClose" aria-label="닫기">&times;</button>
+  </div>
+  <div class="fairy-chat__log" id="fairyChatLog"></div>
+  <div class="fairy-chat__quick" id="fairyChatQuick"></div>
+  <form class="fairy-chat__form" id="fairyChatForm">
+    <input type="text" class="fairy-chat__input" id="fairyChatInput" placeholder="궁금한 점을 물어보세요" autocomplete="off">
+    <button type="submit" class="fairy-chat__send" aria-label="보내기">보내기</button>
+  </form>
+</div>
+
+<script src="script.js?v=25"></script>
 </body>
 </html>

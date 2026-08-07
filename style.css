@@ -1395,18 +1395,128 @@ input:focus,textarea:focus{border-color:var(--c-black);}
   .object-detail__image{max-height:56vh;}
 }
 
-/* ---------- floating fairy chatbot ---------- */
+/* ---------- flying fairy chatbot ---------- */
+/* Two layers on purpose: the outer node owns fixed positioning + the
+   JS-driven flight transform + the drop-shadow filter; the inner node owns
+   the CSS mask (silhouette shape) + idle/flight keyframe animation. Chromium
+   has a compositing bug where filter + mask-image on the SAME animated
+   fixed element blanks out unrelated sibling content beneath it, so the
+   two concerns are split across parent/child to avoid it. */
 .fairy-chatbot{
-  position:fixed;right:clamp(1.5rem,4vw,3.5rem);bottom:clamp(1.5rem,5vh,3.5rem);
-  width:clamp(4rem,7vw,6rem);height:auto;z-index:500;
-  pointer-events:none;
-  animation:fairy-float 4.5s ease-in-out infinite;
-  filter:drop-shadow(0 12px 18px rgba(21,20,21,.18));
+  position:fixed;left:0;top:0;z-index:500;
+  width:clamp(3.5rem,6vw,5.5rem);aspect-ratio:1023/1537;
+  cursor:pointer;
+  filter:drop-shadow(0 10px 16px rgba(21,20,21,.2));
+  transform:translate3d(-999px,-999px,0);
+  transition:transform 1.3s var(--f-smooth);
+  will-change:transform;
 }
-@keyframes fairy-float{
+.fairy-chatbot__shape{
+  width:100%;height:100%;
+  -webkit-mask-image:url('img/chatbot.png');mask-image:url('img/chatbot.png');
+  -webkit-mask-size:contain;mask-size:contain;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  background-color:var(--c-black);
+  transition:background-color .4s var(--f-smooth);
+  animation:fairy-sit 4.5s ease-in-out infinite;
+  transform-origin:50% 85%;
+}
+.fairy-chatbot.is-on-dark .fairy-chatbot__shape{background-color:var(--c-yellow);}
+.fairy-chatbot.is-flying .fairy-chatbot__shape{animation:fairy-fly 1.6s ease-in-out infinite;}
+@keyframes fairy-sit{
   0%,100%{transform:translateY(0) rotate(-2deg);}
-  50%{transform:translateY(-16px) rotate(2deg);}
+  50%{transform:translateY(-8px) rotate(2deg);}
+}
+@keyframes fairy-fly{
+  0%,100%{transform:translate(0,0) rotate(-5deg);}
+  25%{transform:translate(5px,-10px) rotate(4deg);}
+  50%{transform:translate(0,-2px) rotate(-3deg);}
+  75%{transform:translate(-5px,-10px) rotate(5deg);}
 }
 @media(max-width:768px){
-  .fairy-chatbot{width:clamp(3rem,14vw,4.5rem);}
+  .fairy-chatbot{width:clamp(2.75rem,12vw,4rem);}
+}
+
+/* ---------- fairy chat panel ---------- */
+.fairy-chat{
+  position:fixed;right:clamp(1rem,3.5vw,2.5rem);bottom:clamp(1rem,4.5vh,2.5rem);
+  z-index:600;
+  width:min(21rem,calc(100vw - 2rem));
+  max-height:min(32rem,70vh);
+  display:flex;flex-direction:column;
+  background:var(--c-yellow);color:var(--c-black);
+  border-radius:1.1rem;
+  box-shadow:0 30px 70px rgba(0,0,0,.35);
+  overflow:hidden;
+  opacity:0;visibility:hidden;transform:translateY(16px) scale(.97);
+  transform-origin:bottom right;
+  transition:opacity .3s var(--f-smooth),transform .3s var(--f-smooth),visibility 0s .3s;
+}
+.fairy-chat.is-open{
+  opacity:1;visibility:visible;transform:translateY(0) scale(1);
+  transition:opacity .3s var(--f-smooth),transform .3s var(--f-smooth),visibility 0s;
+}
+.fairy-chat__header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.1rem;border-bottom:1px solid rgba(21,20,21,.12);
+  flex:none;
+}
+.fairy-chat__title{
+  font-family:var(--font-t-2);font-size:1.05rem;letter-spacing:.02em;
+}
+.fairy-chat__close{
+  width:1.8rem;height:1.8rem;border-radius:50%;border:none;background:transparent;
+  font-size:1.3rem;line-height:1;color:var(--c-black);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s var(--f-fast);
+}
+.fairy-chat__close:hover{background:rgba(21,20,21,.08);}
+.fairy-chat__log{
+  flex:1 1 auto;overflow-y:auto;padding:.9rem 1.1rem;
+  display:flex;flex-direction:column;gap:.7rem;
+  min-height:8rem;
+}
+.fairy-chat__msg{
+  max-width:88%;padding:.6rem .85rem;border-radius:.8rem;
+  font-family:var(--font-b-regular);font-size:.88rem;line-height:1.5;
+  white-space:pre-line;
+}
+.fairy-chat__msg--bot{
+  align-self:flex-start;background:rgba(255,255,255,.65);
+  border-bottom-left-radius:.25rem;
+}
+.fairy-chat__msg--user{
+  align-self:flex-end;background:var(--c-black);color:var(--c-yellow);
+  border-bottom-right-radius:.25rem;
+}
+.fairy-chat__quick{
+  flex:none;display:flex;flex-wrap:wrap;gap:.4rem;
+  padding:0 1.1rem .8rem;
+}
+.fairy-chat__chip{
+  border:1px solid rgba(21,20,21,.25);background:transparent;color:var(--c-black);
+  border-radius:100px;padding:.35rem .75rem;font-size:.78rem;
+  font-family:var(--font-b-regular);cursor:pointer;
+  transition:background .25s var(--f-fast),color .25s var(--f-fast);
+}
+.fairy-chat__chip:hover{background:var(--c-black);color:var(--c-yellow);}
+.fairy-chat__form{
+  flex:none;display:flex;gap:.5rem;
+  padding:.8rem 1.1rem;border-top:1px solid rgba(21,20,21,.12);
+}
+.fairy-chat__input{
+  flex:1 1 auto;min-width:0;border:1px solid rgba(21,20,21,.25);border-radius:100px;
+  padding:.55rem .9rem;font-family:var(--font-b-regular);font-size:.85rem;
+  background:#fff;color:var(--c-black);
+}
+.fairy-chat__input:focus{outline:none;border-color:var(--c-black);}
+.fairy-chat__send{
+  flex:none;border:none;border-radius:100px;padding:.55rem 1rem;
+  background:var(--c-black);color:var(--c-yellow);font-family:var(--font-b-medium);
+  font-size:.8rem;cursor:pointer;transition:opacity .25s var(--f-fast);
+}
+.fairy-chat__send:hover{opacity:.75;}
+@media(max-width:600px){
+  .fairy-chat{right:1rem;bottom:1rem;left:1rem;width:auto;}
 }

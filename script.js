@@ -16,6 +16,23 @@ window.addEventListener('pageshow', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---- resync scroll-linked animations once scrolling fully settles ----
+     Several sections drive their visuals from a "progress" fraction read
+     straight off getBoundingClientRect at scroll time (Places' ambient
+     photo fade/position, the hero exit, the objects grid/stack, the
+     header theme, the fairy). The site's own smooth-scroll layer can
+     briefly disagree with the true scroll position during a fast
+     direction change (scroll down then quickly back up), so whichever of
+     these happens to compute during that split second can freeze on a
+     stale value — nothing re-triggers it afterwards since scrolling has
+     "stopped". Every such function registers itself here and gets one
+     final forced recompute on scrollend, so the visuals always settle on
+     the value that matches where the page actually ended up. */
+  const scrollResyncFns = [];
+  window.addEventListener('scrollend', () => {
+    scrollResyncFns.forEach((fn) => fn());
+  });
+
   /* ---- one viewport-height source for Chrome / Safari / Firefox ---- */
   const root = document.documentElement;
   let viewportFrame = 0;
@@ -199,7 +216,264 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', requestHeaderTheme, { passive: true });
   window.addEventListener('resize', requestHeaderTheme);
+  scrollResyncFns.push(requestHeaderTheme);
   updateHeaderTheme();
+
+  /* ---- fairy mascot: starts above the hero note, then just sits bottom-right ---- */
+  const fairyChatbot = document.getElementById('fairyChatbot');
+  const fairyChatPanel = document.getElementById('fairyChat');
+  let isFairyChatOpen = false;
+  let requestFairyPosition = () => {};
+  if (fairyChatbot) {
+    const fairyHeroSection = document.getElementById('hero');
+    const fairyHeroNote = document.querySelector('.hero__actions .hero__note');
+
+    let fairyHeroSectionAbs = null;
+    let ivorySurfacesAbs = [];
+    let fairySize = { w: 80, h: 120 };
+
+    const measureAbs = (el) => {
+      const r = el.getBoundingClientRect();
+      const sy = window.scrollY;
+      return { top: r.top + sy, bottom: r.bottom + sy, left: r.left, width: r.width, height: r.height };
+    };
+
+    const measureFairyLayout = () => {
+      if (fairyHeroSection) fairyHeroSectionAbs = measureAbs(fairyHeroSection);
+      ivorySurfacesAbs = ivorySurfaces.map(measureAbs);
+      const fr = fairyChatbot.getBoundingClientRect();
+      fairySize = { w: fr.width || 80, h: fr.height || 120 };
+    };
+
+    let fairyFrame = 0;
+    let fairyFlyTimer = 0;
+
+    const updateFairyPosition = () => {
+      fairyFrame = 0;
+      const scrollY = window.scrollY;
+      const probeY = window.innerHeight * 0.5 + scrollY;
+      const inHero = fairyHeroSectionAbs
+        && probeY >= fairyHeroSectionAbs.top && probeY < fairyHeroSectionAbs.bottom;
+
+      const fw = fairySize.w;
+      const fh = fairySize.h;
+
+      const margin = 40;
+      const topLimit = (siteHeader?.offsetHeight || 0) + 24;
+      const bottomLimit = window.innerHeight - margin;
+
+      let x, y;
+      if (isFairyChatOpen && fairyChatPanel) {
+        /* stays put right above the open chat panel's right side, ignoring
+           scroll/hero logic entirely until the panel closes again */
+        const panel = fairyChatPanel.getBoundingClientRect();
+        x = panel.right - fw + 6;
+        y = panel.top - fh * 0.62;
+      } else if (inHero && fairyHeroNote) {
+        /* hero__note sits inside .hero__actions, which the hero exit
+           motion nudges/rotates as you scroll — read it live rather than
+           from a cached rect so the perch tracks that movement. */
+        const live = fairyHeroNote.getBoundingClientRect();
+        x = live.left + live.width / 2 - fw / 2;
+        y = live.top - fh * 0.7;
+      } else {
+        x = window.innerWidth - fw - margin;
+        y = bottomLimit - fh;
+      }
+
+      x = Math.min(Math.max(x, margin), window.innerWidth - fw - margin);
+      y = Math.min(Math.max(y, topLimit), bottomLimit - fh);
+
+      fairyChatbot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+      const cx = x + fw / 2;
+      const cy = y + fh / 2 + scrollY;
+      const isOnLight = ivorySurfacesAbs.some((sr) => cy >= sr.top && cy <= sr.bottom && cx >= sr.left && cx <= sr.left + sr.width);
+      fairyChatbot.classList.toggle('is-on-dark', !isOnLight);
+    };
+
+    requestFairyPosition = () => {
+      if (!fairyFrame) fairyFrame = requestAnimationFrame(updateFairyPosition);
+    };
+
+    measureFairyLayout();
+    window.addEventListener('resize', () => {
+      measureFairyLayout();
+      requestFairyPosition();
+    });
+
+    const onFairyScroll = () => {
+      if (isFairyChatOpen) return;
+      fairyChatbot.classList.add('is-flying');
+      requestFairyPosition();
+      clearTimeout(fairyFlyTimer);
+      fairyFlyTimer = setTimeout(() => fairyChatbot.classList.remove('is-flying'), 260);
+    };
+
+    window.addEventListener('scroll', onFairyScroll, { passive: true });
+    scrollResyncFns.push(updateFairyPosition);
+    updateFairyPosition();
+  }
+
+  /* ---- ask kyeong ah: click the fairy to open a small Q&A chatbot ----
+     Answers only ever come from KYEONG_AH_TOPICS below — nothing is
+     generated. Free-text input is matched against each topic's keyword
+     list and the best match's canned answer is shown verbatim; anything
+     that matches no topic gets the fallback (declines + contact info). */
+  const fairyChat = fairyChatPanel;
+  if (fairyChatbot && fairyChat) {
+    const chatLog = document.getElementById('fairyChatLog');
+    const chatQuick = document.getElementById('fairyChatQuick');
+    const chatForm = document.getElementById('fairyChatForm');
+    const chatInput = document.getElementById('fairyChatInput');
+    const chatClose = document.getElementById('fairyChatClose');
+
+    const KYEONG_AH_TOPICS = [
+      {
+        id: 'intro',
+        label: '자기소개',
+        keywords: ['소개', '누구', '어떤 사람', '자기소개'],
+        answer: '학교에서 편집디자인 수업을 들으며 처음 웹페이지를 만들어봤는데, 그때 느낀 재미가 지금의 방향을 결정했습니다. 이후 웹디자인에 흥미를 갖고 알아보다가 UX/UI라는 직업을 알게 되면서 본격적으로 관심을 갖게 되었습니다. 평소에 꾸미는 걸 좋아해서 컬러렌즈도 다양하게 써보는 편인데, 막상 렌즈를 살 때마다 저한테 안 어울리는 색을 고르거나 직경을 몰라서 눈에 맞지 않는 제품을 사는 바람에 돈을 낭비한 적이 많았습니다. 이런 불편함을 겪을 때마다 원인을 먼저 찾아서 해결하고, 그 다음에 디자인으로 풀어내는 과정을 좋아합니다.'
+      },
+      {
+        id: 'why-uxui',
+        label: 'UX/UI를 선택한 이유',
+        keywords: ['ux', 'ui', '왜', '선택', '이유', '되고 싶'],
+        answer: '편집디자인 수업에서 웹페이지를 만들며 느낀 재미가 시작이었습니다. 이후 웹디자인을 더 알아보다가 UX/UI라는 직업을 알게 되었고, 사용자가 더 편리하게 쓸 수 있도록 먼저 원인을 찾고 해결한 뒤 디자인으로 풀어내는 과정에 매력을 느껴서 이 길을 선택하게 되었습니다.'
+      },
+      {
+        id: 'strengths',
+        label: '강점과 작업 방식',
+        keywords: ['강점', '작업 방식', '작업방식', '장점', '성향', '스타일'],
+        answer: '작업할 때 전체적인 흐름을 먼저 파악한 뒤, 사용자가 가장 불편하다고 느끼는 지점을 찾아내는 것부터 시작합니다. 문제를 발견하면 원인을 찾을 때까지 파고드는 편이고, 주어진 일에는 끝까지 열심히 임하는 성향입니다. 예를 들어 컬러렌즈를 구매할 때 저에게 안 어울리거나 직경이 맞지 않아 돈을 낭비했던 경험을 그냥 넘기지 않고, 그 불편함을 직접 해결하기 위해 개인 프로젝트인 EYEUM을 기획하고 만들었습니다. 이 과정에서 AI를 최대한 활용해 더 편안하고 안정적인 결과를 만드는 것을 중요하게 생각합니다.'
+      },
+      {
+        id: 'weakness',
+        label: '보완하고 싶은 점',
+        keywords: ['보완', '약점', '단점', '부족', '아쉬운'],
+        answer: '작업 마무리가 상대적으로 약한 편이라고 생각합니다. 그래서 혼자 판단하고 끝내기보다는 제3자의 검토를 받고, 전체적으로 여러 번 다시 살펴보는 방식으로 보완하고 있습니다.'
+      },
+      {
+        id: 'tools',
+        label: '사용 도구',
+        keywords: ['도구', '툴', 'tool', 'figma', '피그마', 'vs code', '브이에스코드'],
+        answer: '디자인은 Figma로 작업하고, 실제 구현은 VS Code에서 HTML/CSS를 중심으로 진행합니다. 작업 과정 전반에서 Claude와 Codex 같은 AI 도구를 적극적으로 활용해서 기획부터 프론트엔드 구현까지 이어가고 있습니다.'
+      },
+      {
+        id: 'ai',
+        label: 'AI 활용 경험',
+        keywords: ['ai', '인공지능', '활용', 'codex', 'claude', '클로드', '코덱스'],
+        answer: '기획 단계부터 AI 도구를 활용해 아이디어를 구체화하고, VS Code에서 Claude와 Codex를 활용해 원하는 인터랙션을 직접 구현합니다. 인앱 금융 프로젝트는 디자인 완성도보다 AI를 얼마나 잘 활용했는지를 보여주는 데 목적을 둔 대시보드형 앱으로, 기획부터 구현까지 AI를 중심에 두고 작업했습니다.'
+      },
+      {
+        id: 'projects',
+        label: '프로젝트',
+        keywords: ['프로젝트', 'eyeum', '아이음', 'marshall', '마샬', 'viner', '바이너', '와인', '인앱', '포트폴리오', '작업물'],
+        answer: 'EYEUM (아이음) — 컬러렌즈 앱\nAR 착용 프리뷰와 개인 맞춤 렌즈 추천 기능이 있는 모바일 웹 프로토타입을 기획부터 프론트엔드 구현까지 전부 담당했습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 브랜드 아이덴티티 설계부터 UX 기획서 작성, 10개 화면 HTML/CSS 프로토타입 제작과 배포까지 기획·디자인·구현을 혼자 끝까지 이어가는 데 집중했습니다.\n\nMarshall 웹 리브랜딩 (팀 프로젝트)\n마샬 브랜드의 웹을 리브랜딩하는 팀 프로젝트에서 기획에 참여하고 서브페이지 디자인과 프론트엔드 구현을 맡았습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 서브페이지의 디자인 완성도와 이를 실제 코드로 옮기는 프론트엔드 구현에 집중했습니다.\n\nViner 와인 커뮤니티 모바일 웹\n와인 커뮤니티 모바일 웹 서비스에서 기획 참여, 프론트엔드 개발, 웹 퍼블리싱, 테스트 및 수정·보완까지 전 과정에 참여했습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 그중에서도 VS Code로 직접 구현하고 수정하는 작업에 특히 비중을 많이 뒀습니다.\n\nAI 활용 프로젝트 (인앱 금융 대시보드)\n디자인 완성도보다 AI를 얼마나 잘 활용했는지를 보여주는 데 목적을 둔 대시보드형 앱을 기획부터 구현까지 전부 담당했습니다.\n사용 툴: Figma, VS Code, Codex\n중심 작업: AI를 실제 작업 흐름에 어떻게 녹여내는지를 보여주는 것 자체가 핵심이었습니다.'
+      },
+      {
+        id: 'goals',
+        label: '관심 분야와 목표',
+        keywords: ['관심', '목표', '앞으로', '계획', '미래', '90일'],
+        answer: '편집디자인에서 시작해 웹디자인, 그리고 UX/UI로 관심이 확장되어 왔습니다. 지금은 디자인뿐 아니라 프론트엔드 구현과 AI 활용을 함께 보여줄 수 있는 디자이너를 목표로 하고 있습니다. 앞으로 90일은 포트폴리오를 완성에서 끝내지 않고, 지금까지 만든 프로젝트들을 실제 서비스처럼 하나씩 더 다듬어보려고 합니다. 특히 AI 도구를 단순히 작업을 도와주는 수단이 아니라 기획부터 구현까지 작업 흐름 전체에 자연스럽게 녹이는 방법을 계속 찾아보는 중입니다. 문제를 발견하면 원인을 찾을 때까지 파고드는 편이라, 이 시기에도 완벽하게 준비된 다음에 시작하기보다는 일단 만들어보고 다듬어가는 방식으로 꾸준히 밀고 나갈 생각입니다.'
+      },
+      {
+        id: 'contact',
+        label: '연락 방법',
+        keywords: ['연락', '이메일', '메일', '전화', '번호', 'contact'],
+        answer: '이메일: cha5593@naver.com\n전화번호: 010-2759-5498'
+      }
+    ];
+
+    const CHAT_FALLBACK = '죄송합니다, 그 부분은 답변해드리기 어렵습니다. 궁금하신 점은 아래 연락처로 문의해주세요.\n\n이메일: cha5593@naver.com\n전화번호: 010-2759-5498';
+
+    const findTopic = (text) => {
+      const q = text.toLowerCase();
+      let best = null;
+      let bestScore = 0;
+      KYEONG_AH_TOPICS.forEach((topic) => {
+        let score = 0;
+        topic.keywords.forEach((kw) => { if (q.includes(kw.toLowerCase())) score += 1; });
+        if (score > bestScore) { bestScore = score; best = topic; }
+      });
+      return bestScore > 0 ? best : null;
+    };
+
+    const appendMessage = (text, from) => {
+      const msg = document.createElement('div');
+      msg.className = `fairy-chat__msg fairy-chat__msg--${from}`;
+      msg.textContent = text;
+      chatLog.appendChild(msg);
+      chatLog.scrollTop = chatLog.scrollHeight;
+      /* the panel grows taller (bottom stays put) as messages stack up —
+         follow its rising top edge instead of staying at the height it
+         opened at */
+      requestFairyPosition();
+    };
+
+    const renderQuickReplies = () => {
+      chatQuick.innerHTML = '';
+      KYEONG_AH_TOPICS.forEach((topic) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'fairy-chat__chip';
+        chip.textContent = topic.label;
+        chip.addEventListener('click', () => {
+          appendMessage(topic.label, 'user');
+          appendMessage(topic.answer, 'bot');
+        });
+        chatQuick.appendChild(chip);
+      });
+    };
+
+    let chatStarted = false;
+    const openChat = () => {
+      fairyChat.classList.add('is-open');
+      fairyChat.setAttribute('aria-hidden', 'false');
+      if (!chatStarted) {
+        chatStarted = true;
+        renderQuickReplies();
+        appendMessage('안녕하세요! 경아에 대해 궁금한 점을 아래에서 골라보거나 직접 물어보세요.', 'bot');
+      }
+      chatInput?.focus();
+      isFairyChatOpen = true;
+      fairyChatbot.classList.remove('is-flying');
+      requestFairyPosition();
+      /* the panel itself is still animating open (scale/translateY) right
+         now, so this first pass targets its not-yet-settled box — line up
+         with where it actually lands once that finishes. */
+      setTimeout(requestFairyPosition, 320);
+    };
+    const closeChat = () => {
+      fairyChat.classList.remove('is-open');
+      fairyChat.setAttribute('aria-hidden', 'true');
+      isFairyChatOpen = false;
+      requestFairyPosition();
+    };
+    const toggleChat = () => {
+      if (fairyChat.classList.contains('is-open')) closeChat();
+      else openChat();
+    };
+
+    fairyChatbot.addEventListener('click', toggleChat);
+    fairyChatbot.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleChat();
+      }
+    });
+    chatClose?.addEventListener('click', closeChat);
+
+    chatForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = chatInput.value.trim();
+      if (!value) return;
+      appendMessage(value, 'user');
+      const topic = findTopic(value);
+      appendMessage(topic ? topic.answer : CHAT_FALLBACK, 'bot');
+      chatInput.value = '';
+    });
+  }
 
   /* ---- custom cursor ---- */
   const cursor = document.querySelector('.cursor-dot');
@@ -270,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', updateHeroMotion, { passive: true });
     window.addEventListener('resize', updateHeroMotion);
+    scrollResyncFns.push(updateHeroMotion);
     updateHeroMotion();
   }
 
@@ -355,8 +630,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = placesStory.getBoundingClientRect();
       const scrollable = placesStory.offsetHeight - document.documentElement.clientHeight;
       const progress = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
-      const expansion = smoothstep(clamp01(progress / 0.28));
+      /* Narrower than it used to be (was /0.28): that gave the scattered
+         grid → gathered-photo transition ~500px of scroll to play out,
+         which is a wide enough target that landing mid-transition (a
+         refresh, or a scroll that stops on its own momentum) was common
+         and looked like broken/overlapping layout rather than an
+         animation in progress. */
+      const expansion = smoothstep(clamp01(progress / 0.14));
       const shrinking = smoothstep(clamp01((progress - 0.68) / 0.32));
+      /* The grid photos fading out and the bio text fading in used to
+         both be driven directly off `expansion`, so for the whole middle
+         of the transition both were half-visible at once — a grid of
+         photos double-exposed with a block of text on top of it, which
+         reads as broken layout rather than a crossfade. Split expansion
+         into two back-to-back halves instead: photos are fully gone
+         before the text starts appearing. */
+      const ambientFade = smoothstep(clamp01(expansion / 0.5));
+      const textReveal = smoothstep(clamp01((expansion - 0.5) / 0.5));
 
       const activeSlideEl = placesCarousel.querySelector('.places__slide.is-active');
       const activeOriginalImg = activeSlideEl?.querySelector('.places__slide-original');
@@ -376,7 +666,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nudgeX = nudge.x || 0;
         const nudgeY = nudge.y || 0;
         el.style.transform = `translate3d(calc(${x * expansion}vw + ${nudgeX}px), calc(${yOffset}px + ${nudgeY}px), 0)`;
-        el.style.opacity = 1 - expansion;
+        el.style.opacity = 1 - ambientFade;
       });
 
       const carouselWidth = placesCarousel.offsetWidth;
@@ -444,8 +734,12 @@ document.addEventListener('DOMContentLoaded', () => {
          would measure last frame's (stale) box and let the text overlap
          the photo while it's quickly growing/shrinking. */
       if (placesStatement) {
-        placesStatement.style.opacity = expansion;
-        placesStatement.style.pointerEvents = expansion > 0.5 ? 'auto' : 'none';
+        /* visible only in the settled middle of the sequence — fades back
+           out as the photo starts arching into the vault-door shape, so
+           it's gone by the time that shape (and the next heading) show. */
+        const statementOpacity = textReveal * (1 - shrinking);
+        placesStatement.style.opacity = statementOpacity;
+        placesStatement.style.pointerEvents = statementOpacity > 0.05 ? 'auto' : 'none';
         const stickyEl = placesStatement.offsetParent;
         if (stickyEl) {
           const stickyRect = stickyEl.getBoundingClientRect();
@@ -487,6 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', updatePlacesMotion, { passive: true });
     window.addEventListener('resize', handlePlacesResize);
+    scrollResyncFns.push(updatePlacesMotion);
     /* Main box has no CSS width of its own (it's set entirely by JS
        below) — paint once first so it has real dimensions to measure,
        then compute the gap nudge against that, then paint again so the
@@ -814,6 +1109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', requestPortfolioMotion, { passive: true });
   window.addEventListener('resize', requestPortfolioMotion);
+  scrollResyncFns.push(requestPortfolioMotion);
   updatePortfolioMotion();
 
   /* ---- click a grid card to open that object's own detail page ---- */
