@@ -1394,3 +1394,19 @@ input:focus,textarea:focus{border-color:var(--c-black);}
   .object-detail{grid-template-columns:1fr;gap:2rem;padding-top:8rem;}
   .object-detail__image{max-height:56vh;}
 }
+
+/* ---------- floating fairy chatbot ---------- */
+.fairy-chatbot{
+  position:fixed;right:clamp(1.5rem,4vw,3.5rem);bottom:clamp(1.5rem,5vh,3.5rem);
+  width:clamp(4rem,7vw,6rem);height:auto;z-index:500;
+  pointer-events:none;
+  animation:fairy-float 4.5s ease-in-out infinite;
+  filter:drop-shadow(0 12px 18px rgba(21,20,21,.18));
+}
+@keyframes fairy-float{
+  0%,100%{transform:translateY(0) rotate(-2deg);}
+  50%{transform:translateY(-16px) rotate(2deg);}
+}
+@media(max-width:768px){
+  .fairy-chatbot{width:clamp(3rem,14vw,4.5rem);}
+}
