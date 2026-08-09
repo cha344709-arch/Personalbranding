@@ -888,12 +888,17 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 
 /* ---------- admission ---------- */
 .admission{background:var(--c-yellow);color:var(--c-black);}
-.admission__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0;}
+.admission__bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16rem);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 16rem);
+}
 .admission .section__head{position:relative;z-index:1;}
 .admission__form{position:relative;z-index:1;width:min(100%,40rem);display:flex;flex-direction:column;gap:2em;}
 .field,.field-row{display:flex;flex-direction:column;gap:.3em;}
 .field-row{flex-direction:row;gap:2em;}
 .field-row .field{flex:1;}
+.admission__optional{opacity:.55;font-size:.85em;}
 label{font-family:var(--font-b-regular);font-size:var(--fs-m);color:rgba(21,20,21,.65);line-height:1.25;}
 input,textarea{
   background:transparent;border:none;border-bottom:1px solid rgba(21,20,21,.25);
