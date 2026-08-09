@@ -753,7 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const maxLeft = stickyRect.width - placesStatement.offsetWidth - 32;
           placesStatement.style.top = 'auto';
           placesStatement.style.bottom = `${photoBottom}px`;
-          placesStatement.style.left = `${Math.min(photoRight + 12, maxLeft)}px`;
+          placesStatement.style.left = `${Math.min(photoRight - 88, maxLeft)}px`;
           placesStatement.style.right = 'auto';
           placesStatement.style.transform = 'none';
         }
@@ -997,6 +997,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioMergeDetails = objectsScroll?.querySelector('.objects__merge-details');
   const objectMergeName = document.getElementById('objectMergeName');
   const objectMergeCount = document.getElementById('objectMergeCount');
+  const objectMergeTopLeft = document.getElementById('objectMergeTopLeft');
+  const objectMergeRight = document.getElementById('objectMergeRight');
+  const objectMergeBottomLeft = document.getElementById('objectMergeBottomLeft');
+  const objectMergeLink = document.getElementById('objectMergeLink');
   const objectsButterflyGradient = document.getElementById('objectsButterflyGradient');
   const objectsButterflyPath = objectsScroll?.querySelector('.objects__butterfly-path');
   let portfolioMotionFrame = 0;
@@ -1010,6 +1014,42 @@ document.addEventListener('DOMContentLoaded', () => {
     'EYEUM',
     'MARSHALL',
     'VINER'
+  ];
+  /* Same order/index as objectNames — the merge-view captions for
+     whichever card is currently in front. */
+  const objectMergeCopy = [
+    {
+      topLeft: '소비를 이해하고,<br>다음 행동을 설계하다.',
+      nameLine1: 'AI IN_APP',
+      nameLine2: 'AI MONEY COACH',
+      right: '소비 데이터를 분석해<br>절약이 필요한 지점과 다음 행동을<br>제안하는 AI 금융 코칭 서비스',
+      bottomLeft: '단순한 소비 내역을 넘어, 사용자가 바로 실천할 수 있는 절약 방법과 목표의 변화를 이해하기 쉽게 설계했습니다.',
+      id: 'ai-in-app'
+    },
+    {
+      topLeft: '나에게 어울리는 렌즈를<br>더 쉽고 정확하게.',
+      nameLine1: 'EYEUM',
+      nameLine2: 'LENS SHOPPING APP',
+      right: '취향 분석과 AR 체험을 통해<br>사용자에게 어울리는 렌즈를 찾아주는<br>맞춤형 렌즈 쇼핑 서비스',
+      bottomLeft: '렌즈 선택의 어려움을 줄이고 탐색부터 가상 착용, 구매까지 자연스럽게 이어지는 경험을 설계했습니다.',
+      id: 'eyeum'
+    },
+    {
+      topLeft: '소리의 헤리티지를<br>오늘의 경험으로.',
+      nameLine1: 'MARSHALL',
+      nameLine2: 'BRAND RE-DESIGN',
+      right: '1962년부터 이어진 브랜드의 역사와<br>아날로그 감성을 디지털로 전달하는<br>Marshall 리브랜딩 웹사이트',
+      bottomLeft: '제품을 보여주는 데서 그치지 않고 Marshall의 역사, 디자인과 사운드를 하나의 흐름으로 경험하도록 구성했습니다.',
+      id: 'marshall'
+    },
+    {
+      topLeft: '와인을 고르는 경험을<br>취향으로 연결하다.',
+      nameLine1: 'VINER',
+      nameLine2: 'WINE COMMUNITY APP',
+      right: '와인을 발견하고 기록하며<br>비슷한 취향의 사람들과 연결되는<br>와인 커뮤니티 서비스',
+      bottomLeft: '어렵게 느껴지는 와인 탐색 과정을 취향 중심으로 단순화하고, 기록과 소통이 이어지도록 설계했습니다.',
+      id: 'viner'
+    }
   ];
   const clamp01 = (value) => Math.max(0, Math.min(1, value));
   const rotateRight = (values, amount) => {
@@ -1092,9 +1132,14 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioMergeDetails.classList.toggle('is-visible', isStack);
     }
     if (objectMergeName && objectMergeCount) {
-      objectMergeName.textContent = objectNames[sequenceStep];
+      const copy = objectMergeCopy[sequenceStep];
+      objectMergeName.innerHTML = `${copy.nameLine1}<br>${copy.nameLine2}`;
       objectMergeCount.textContent = `${sequenceStep + 1}/4`;
       objectMergeCount.style.setProperty('--object-local-progress', clamp01(localProgress).toFixed(4));
+      if (objectMergeTopLeft) objectMergeTopLeft.innerHTML = copy.topLeft;
+      if (objectMergeRight) objectMergeRight.innerHTML = copy.right;
+      if (objectMergeBottomLeft) objectMergeBottomLeft.innerHTML = copy.bottomLeft;
+      if (objectMergeLink) objectMergeLink.href = `object.html?id=${copy.id}`;
     }
     if (objectsButterflyGradient) {
       objectsButterflyGradient.setAttribute('gradientTransform', `rotate(${stackProgress * 360} .5 .5)`);
@@ -1151,17 +1196,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mainText) mainText.textContent = li.dataset.text;
     });
   });
-
-  /* ---- admission form ---- */
-  const form = document.getElementById('admissionForm');
-  const success = document.getElementById('admissionSuccess');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      success.classList.add('is-visible');
-      form.reset();
-    });
-  }
 
   /* ---- smooth in-page nav ---- */
   document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -6,7 +6,7 @@
 <title>The Obsidian Assembly</title>
 <meta name="description" content="The Obsidian Assembly is an independent organization coordinating distributed spaces, operations, and product development across multiple locations.">
 <meta name="theme-color" content="#151415">
-<link rel="stylesheet" href="style.css?v=37">
+<link rel="stylesheet" href="style.css?v=53">
 </head>
 <body>
 
@@ -29,12 +29,12 @@
     <img class="logo__image" src="./img/CHA-KYEONG-AH-logo.png?v=2" alt="CHA KYEONG AH">
   </a>
   <nav class="header-nav">
-    <a href="#places">Places</a>
+    <a href="#places">About</a>
     <span class="header-nav__sep"></span>
-    <a href="#objects">Objects</a>
+    <a href="#objects">Projects</a>
   </nav>
   <div class="header-right">
-    <a href="#admission" class="header-request">send request</a>
+    <a href="#admission" class="header-request">contact</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu 열기">
       <span class="menu-toggle__icon"><i></i><i></i></span>
       <span class="menu-toggle__label">Menu</span>
@@ -52,10 +52,9 @@
       <span>Navigation</span>
     </div>
     <nav class="menu-overlay__nav">
-      <a href="#places" class="mnav mnav--1">Places</a>
-      <a href="#objects" class="mnav mnav--2">Objects</a>
-      <a href="#" class="mnav mnav--3 disabled">About</a>
-      <a href="#admission" class="mnav mnav--4">Contacts</a>
+      <a href="#places" class="mnav mnav--1">About</a>
+      <a href="#objects" class="mnav mnav--2">Projects</a>
+      <a href="#admission" class="mnav mnav--3">Contacts</a>
     </nav>
   </div>
 </div>
@@ -75,19 +74,19 @@
     </h1>
 
     <figure class="hero__photo hero__photo--left">
-      <img src="img/EYEUM.png?v=2" alt="EYEUM" loading="eager">
+      <img src="img/eyeum-thumbnail.png" alt="EYEUM" loading="eager">
       <span>P.</span>
     </figure>
     <figure class="hero__photo hero__photo--left-back">
-      <img src="img/AI Money Coach.png?v=2" alt="AI Money Coach" loading="eager">
+      <img src="img/ai-in-app-thumbnail.png" alt="AI IN_APP" loading="eager">
       <span>P.</span>
     </figure>
     <figure class="hero__photo hero__photo--right">
-      <img src="img/marshall_rebrand.png" alt="Marshall Rebrand" loading="eager">
+      <img src="img/marshall-thumbnail.png" alt="Marshall Rebrand" loading="eager">
       <span>I.</span>
     </figure>
     <figure class="hero__photo hero__photo--right-back">
-      <img src="img/wine.png" alt="Wine" loading="eager">
+      <img src="img/viner-thumbnail.png" alt="Viner" loading="eager">
       <span>I.</span>
     </figure>
 
@@ -97,7 +96,7 @@
 
     <div class="hero__actions">
       <span class="hero__note">Commitment<br>Precedes<br>Entry /</span>
-      <a href="#admission" class="btn btn--ghost">Seek Admission</a>
+      <a href="#objects" class="btn btn--ghost">View Projects</a>
     </div>
     <span class="hero__bottom-tag">Imagine Possible</span>
   </section>
@@ -110,7 +109,7 @@
     <div class="scroll-pin" id="placesScroll" style="--slides:3">
       <div class="scroll-pin__sticky">
         <div class="section__head reveal">
-          <span class="eyebrow">Explore&nbsp;Places</span>
+          <span class="eyebrow">About</span>
           <h2 class="section__title">Still Becoming,<br>Still Me</h2>
         </div>
         <div class="places__gallery-surround" aria-hidden="true">
@@ -150,9 +149,10 @@
           </div>
         </div>
         <div class="places__statement" id="placesStatement">
-          <p>편집디자인 수업에서 처음 웹페이지를 만들어보면서, 화면 하나를 구성하는 일에 재미를 느꼈어요. 그 흥미를 따라 웹디자인을 계속 찾아보다가 UX/UI라는 분야를 알게 됐고, 자연스럽게 관심을 갖게 됐습니다.</p>
-          <p>일을 시작할 때는 항상 전체 흐름을 먼저 봐요. 그리고 UX를 설계할 때는 사용자가 가장 불편하게 느끼는 지점이 어디인지부터 찾습니다. 그 지점을 찾고 나면, AI를 최대한 활용해서 더 편안하고 안정적으로 느껴지는 화면으로 풀어내는 게 제 작업 방식이에요.</p>
-          <p>최근에는 AI로 원하는 인터랙션을 직접 구현해볼 수 있다는 점에 특히 흥미를 느끼고 있어서, 디자인과 구현을 함께 다루는 방향으로 관심을 넓혀가는 중입니다.</p>
+          <h3 class="places__statement-title">디자인과 AI 사이, 경험을 만들다.</h3>
+          <p>편집디자인 수업에서 웹페이지를 만들며 화면을 구성하는 즐거움을 발견했고, 이를 계기로 UX/UI 디자인에 관심을 갖게 되었습니다.</p>
+          <p>사용자의 불편을 먼저 파악하고 전체 흐름을 설계한 뒤, AI를 활용해 편안하고 안정적인 경험으로 풀어냅니다.</p>
+          <p>최근에는 디자인과 구현을 함께 다루며 원하는 인터랙션을 직접 만드는 방향으로 영역을 넓혀가고 있습니다.</p>
         </div>
         <span class="imagine-tag">Imagine Possible</span>
       </div>
@@ -180,7 +180,7 @@
 
     <div class="places-after__actions reveal">
       <span class="hero__note">See if<br>Nearby /</span>
-      <a href="#admission" class="btn btn--ghost">Seek Admission</a>
+      <a href="#objects" class="btn btn--ghost">View Projects</a>
     </div>
     <img class="places-after__stone" src="images/home/stone-2.webp" alt="" aria-hidden="true">
     <span class="imagine-tag">Imagine Possible</span>
@@ -206,19 +206,19 @@
         <div class="objects__carousel reveal">
           <div class="objects__slides" id="objectSlides">
             <figure class="objects__slide is-active">
-              <img src="img/wine.png" alt="Wine">
+              <img src="img/viner-thumbnail.png" alt="Viner">
               <figcaption class="objects__slide-caption"><strong>VINER</strong><span>(팀프로젝트)</span></figcaption>
             </figure>
             <figure class="objects__slide">
-              <img src="img/AI Money Coach.png?v=2" alt="AI Money Coach">
+              <img src="img/ai-in-app-thumbnail.png" alt="AI IN_APP">
               <figcaption class="objects__slide-caption"><strong>AI IN_APP</strong><span>(AI 활용한 IN_APP)</span></figcaption>
             </figure>
             <figure class="objects__slide">
-              <img src="img/EYEUM.png?v=2" alt="EYEUM">
+              <img src="img/eyeum-thumbnail.png" alt="EYEUM">
               <figcaption class="objects__slide-caption"><strong>EYEUM</strong><span>(개인프로젝트)</span></figcaption>
             </figure>
             <figure class="objects__slide">
-              <img src="img/marshall_rebrand.png" alt="Marshall Rebrand">
+              <img src="img/marshall-thumbnail.png" alt="Marshall Rebrand">
               <figcaption class="objects__slide-caption"><strong>MARSHALL</strong><span>(팀프로젝트)</span></figcaption>
             </figure>
           </div>
@@ -238,13 +238,13 @@
           <path fill="none" stroke="url(#objectsButterflyGradient)" stroke-width="1" vector-effect="non-scaling-stroke" d="M451.13 533.21C158.93 219.87-342.26 1069.71 346.16 682.37 1034.59 295.03 858.7 36.03 251.6 377.12-355.5 718.21 1249.25 214.09 912.6 526.28 575.95 838.46-299.71 26.78 408.58 409.5 1116.86 792.21 160.82 1171.46 244.98 660.4 329.14 149.34 921.11-105.03 719.69 273.06 518.27 651.15-32.09 1155.27 128.67 653.46 289.43 151.65 801.96 230.28 961.78 624.56 1121.59 1018.84 743.33 846.56 451.13 533.21Z"></path>
         </svg>
         <div class="objects__merge-details">
-          <p class="objects__merge-copy objects__merge-copy--left-top">These items are formed within<br>the places themselves.</p>
-          <p class="objects__merge-copy objects__merge-copy--right">Each originates on site, shaped<br>by material, process, and<br>circumstance.</p>
-          <p class="objects__merge-copy objects__merge-copy--left-bottom">Once completed, they leave<br>their point of origin and circulate<br>independently.</p>
+          <p class="objects__merge-copy objects__merge-copy--left-top" id="objectMergeTopLeft">These items are formed within<br>the places themselves.</p>
+          <p class="objects__merge-copy objects__merge-copy--right" id="objectMergeRight">Each originates on site, shaped<br>by material, process, and<br>circumstance.</p>
+          <p class="objects__merge-copy objects__merge-copy--left-bottom" id="objectMergeBottomLeft">Once completed, they leave<br>their point of origin and circulate<br>independently.</p>
           <div class="objects__merge-name"><span id="objectMergeName">(V) The Fox Spirit</span></div>
           <span class="objects__merge-count" id="objectMergeCount">1/4</span>
-          <a class="objects__merge-link" href="https://obsidianassembly.com/objects" target="_blank" rel="noopener">
-            <span>Explore Objects</span><i aria-hidden="true"></i>
+          <a class="objects__merge-link" id="objectMergeLink" href="object.html?id=viner">
+            <span id="objectMergeLinkLabel">프로젝트 보기</span><i aria-hidden="true"></i>
           </a>
         </div>
         <span class="imagine-tag">Imagine Possible</span>
@@ -318,28 +318,25 @@
     <div class="section__head reveal">
       <span class="eyebrow">Admission</span>
     </div>
-    <form class="admission__form reveal" id="admissionForm">
+    <div class="admission__form reveal">
       <div class="field">
-        <label for="email">Email<br>Address</label>
-        <input type="email" id="email" name="email" placeholder="nick-h@gmail.com" required>
+        <label>Email<br>Address</label>
+        <p class="field__static"><a href="mailto:cha5593@naver.com">cha5593@naver.com</a></p>
       </div>
       <div class="field">
-        <label for="phone">Phone<br>Number <span class="admission__optional">(Optional)</span></label>
-        <input type="tel" id="phone" name="phone" placeholder="+41 79 123 45 67">
+        <label>Phone<br>Number</label>
+        <p class="field__static"><a href="tel:010-2759-5498">010-2759-5498</a></p>
       </div>
       <div class="field">
-        <label for="resume">Resume<br>Link <span class="admission__optional">(Optional)</span></label>
-        <input type="url" id="resume" name="resume" placeholder="https://&hellip;">
+        <label>Resume<br>Link</label>
+        <div class="field__static field__static--multi">
+          <a href="https://eyeum.vercel.app" target="_blank" rel="noopener">eyeum.vercel.app</a>
+          <a href="https://marshall-rebrand.vercel.app" target="_blank" rel="noopener">marshall-rebrand.vercel.app</a>
+          <a href="https://wine-app-eight-wine.vercel.app" target="_blank" rel="noopener">wine-app-eight-wine.vercel.app</a>
+          <a href="https://personalbranding-4ti1.vercel.app" target="_blank" rel="noopener">personalbranding-4ti1.vercel.app</a>
+        </div>
       </div>
-      <label class="admission__check">
-        <input type="checkbox" required>
-        <span>I understand that admission is reviewed selectively and responses may
-         take time.</span>
-      </label>
-      <a href="https://obsidianassembly.com/imagine-possible-policy" class="link-underline" target="_blank" rel="noopener">Read ImaginePossible Policy</a>
-      <button type="submit" class="btn btn--solid">Submit Admission</button>
-      <p class="admission__success" id="admissionSuccess" role="status">Received. Responses are not guaranteed.</p>
-    </form>
+    </div>
   </section>
 
 </main>
@@ -351,9 +348,8 @@
   <div class="site-footer__card">
     <span class="site-footer__desc">Independent practice<br>operating across<br>locations.</span>
     <nav class="site-footer__nav">
-      <a href="#places" class="fnav fnav--1"><i>+</i>Places</a>
-      <a href="#objects" class="fnav fnav--2"><i>+</i>Objects</a>
-      <a href="#" class="fnav fnav--3 disabled"><i>+</i>About</a>
+      <a href="#places" class="fnav fnav--1"><i>+</i>About</a>
+      <a href="#objects" class="fnav fnav--2"><i>+</i>Projects</a>
       <a href="#admission" class="fnav fnav--4"><i>+</i>Contacts</a>
     </nav>
     <span class="site-footer__op">Operating<br>Across<br>Locations.</span>
@@ -382,6 +378,6 @@
   </form>
 </div>
 
-<script src="script.js?v=25"></script>
+<script src="script.js?v=31"></script>
 </body>
 </html>
