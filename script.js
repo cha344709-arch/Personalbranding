@@ -1119,8 +1119,8 @@ document.addEventListener('DOMContentLoaded', () => {
         slide.style.visibility = 'visible';
         slide.style.setProperty('--object-card-opacity', '1');
         slide.style.setProperty('--object-card-shift', '0vw');
-        slide.style.setProperty('--object-card-y', `${sequenceOrder * 12}vh`);
-        slide.style.setProperty('--object-card-scale', (Math.max(.72, 1 - depth / 8) * 1.12).toFixed(4));
+        slide.style.setProperty('--object-card-y', `${sequenceOrder * 17}vh`);
+        slide.style.setProperty('--object-card-scale', (Math.max(.62, 1 - depth / 6) * .92).toFixed(4));
         slide.style.setProperty('--object-card-layer', String(sequenceOrder === 1 ? 0 : 20 - depth));
       }
       slide.style.setProperty('--object-card-rotate', '0deg');
@@ -1181,21 +1181,71 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---- updates pager ---- */
+  const updatesGrid = document.querySelector('.updates__grid');
   const pagerItems = document.querySelectorAll('.updates__pager li');
-  const mainImg = document.querySelector('.updates__card--main img');
-  const mainTag = document.querySelector('.updates__col--main .updates__tag');
-  const mainHeadline = document.querySelector('.updates__col--main .updates__headline');
-  const mainText = document.querySelector('.updates__col--main p');
-  pagerItems.forEach(li => {
+  const updateCards = [...document.querySelectorAll('.updates__card')];
+  const updateCols = [...document.querySelectorAll('.updates__info .updates__col')];
+  let activeUpdateIndex = 1;
+  const positionUpdateCards = (activeIndex, dragOffset = 0) => {
+    updateCards.forEach((card, cardIndex) => {
+      const offset = cardIndex - activeIndex;
+      const scale = offset === 0 ? 1 : .78;
+      card.style.transform = `translate(-50%, -50%) translateX(${offset * 82}%) translateX(${dragOffset}px) scale(${scale})`;
+      card.classList.toggle('is-active', offset === 0);
+      card.style.zIndex = String(10 - Math.abs(offset));
+    });
+    updateCols.forEach((col, colIndex) => {
+      const offset = colIndex - activeIndex;
+      col.style.transform = `translateX(${offset * 110 - 50}%) translateX(${dragOffset}px)`;
+      col.classList.toggle('is-active', offset === 0);
+    });
+  };
+  const showUpdate = index => {
+    activeUpdateIndex = Math.max(0, Math.min(updateCards.length - 1, index));
+    pagerItems.forEach((item, itemIndex) => item.classList.toggle('is-active', itemIndex === activeUpdateIndex));
+    positionUpdateCards(activeUpdateIndex);
+  };
+  showUpdate(activeUpdateIndex);
+
+  pagerItems.forEach((li, index) => {
     li.addEventListener('click', () => {
-      pagerItems.forEach(i => i.classList.remove('is-active'));
-      li.classList.add('is-active');
-      if (mainImg) mainImg.src = li.dataset.img;
-      if (mainTag) mainTag.textContent = li.dataset.tag;
-      if (mainHeadline) mainHeadline.innerHTML = li.dataset.headline;
-      if (mainText) mainText.textContent = li.dataset.text;
+      showUpdate(index);
     });
   });
+
+  if (updatesGrid) {
+    let dragStartX = 0;
+    let dragDistance = 0;
+    let isDragging = false;
+
+    updatesGrid.addEventListener('pointerdown', event => {
+      isDragging = true;
+      dragStartX = event.clientX;
+      dragDistance = 0;
+      updatesGrid.classList.add('is-dragging');
+      updatesGrid.setPointerCapture(event.pointerId);
+    });
+
+    updatesGrid.addEventListener('pointermove', event => {
+      if (!isDragging) return;
+      dragDistance = event.clientX - dragStartX;
+      positionUpdateCards(activeUpdateIndex, dragDistance);
+    });
+
+    const finishUpdateDrag = event => {
+      if (!isDragging) return;
+      isDragging = false;
+      updatesGrid.classList.remove('is-dragging');
+      if (updatesGrid.hasPointerCapture(event.pointerId)) updatesGrid.releasePointerCapture(event.pointerId);
+      const threshold = Math.min(90, updatesGrid.clientWidth * .12);
+      if (dragDistance < -threshold) showUpdate(activeUpdateIndex + 1);
+      else if (dragDistance > threshold) showUpdate(activeUpdateIndex - 1);
+      else showUpdate(activeUpdateIndex);
+    };
+
+    updatesGrid.addEventListener('pointerup', finishUpdateDrag);
+    updatesGrid.addEventListener('pointercancel', finishUpdateDrag);
+  }
 
   /* ---- smooth in-page nav ---- */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
