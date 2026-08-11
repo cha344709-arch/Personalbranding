@@ -70,10 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const OBJECTS = {
     viner: {
       name: 'VINER',
-      tag: '(팀프로젝트)',
+      tag: 'Mobile Web · 팀 프로젝트',
       image: 'img/viner-thumbnail.png',
-      tagline: 'Every Bottle Has a Story',
-      desc: '당신의 취향으로 시작되는 와인 이야기, 좋아하는 맛을 발견하고, 특별한 순간을 나눠보세요.'
+      tagline: '와인을 발견하는 순간부터, 취향을 나누는 경험까지.',
+      desc: '취향을 기반으로 와인을 발견하고 기록하며, 다른 사용자와 경험을 공유할 수 있는 와인 커뮤니티 서비스입니다. 와인 탐색부터 리뷰와 기록, 커뮤니티 활동까지 자연스럽게 이어질 수 있도록 모바일 사용자 경험을 구현했습니다.',
+      meta: [
+        ['ROLE', '기획 참여 · UI 구현 · Front-end'],
+        ['CONTRIBUTION', '프론트엔드 개발 · 웹 퍼블리싱 · 테스트 및 개선'],
+        ['AI UTILIZATION', 'Claude · Codex를 활용한 개발 및 오류 개선'],
+        ['PERIOD', '2026.07.06 — 2026.08.06']
+      ]
     },
     'ai-in-app': {
       name: 'AI IN_APP',
@@ -90,17 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     eyeum: {
       name: 'EYEUM',
-      tag: '(개인프로젝트)',
+      tag: 'Mobile App · 개인 프로젝트',
       image: 'img/eyeum-thumbnail.png',
-      tagline: 'For the Beautiful and the Free',
-      desc: ''
+      tagline: '렌즈를 고르는 과정을, 나에게 맞는 경험으로.',
+      desc: 'AR 가상 착용과 맞춤형 렌즈 추천을 결합한 컬러렌즈 서비스입니다. 사용자가 수많은 제품을 직접 비교하는 불편을 줄이고, 자신의 취향과 특징에 맞는 렌즈를 보다 쉽고 직관적으로 탐색할 수 있도록 사용자 경험을 설계했습니다.',
+      meta: [
+        ['ROLE', '기획 · Branding · UI/UX Design · Front-end'],
+        ['CONTRIBUTION', '개인 프로젝트 · 100%'],
+        ['AI UTILIZATION', 'Claude · Codex를 활용한 구현 및 개선'],
+        ['PERIOD', '2026.03.24 — 2026.05.29']
+      ]
     },
     marshall: {
       name: 'MARSHALL',
-      tag: '(팀프로젝트)',
+      tag: 'Brand Redesign · 팀 프로젝트',
       image: 'img/marshall-thumbnail.png',
-      tagline: '',
-      desc: ''
+      tagline: '브랜드의 감성은 유지하고, 탐색 경험은 더 명확하게.',
+      desc: 'Marshall의 브랜드 아이덴티티를 유지하면서 사용자가 필요한 정보에 보다 쉽게 접근할 수 있도록 웹사이트를 리디자인했습니다. 서포트 페이지를 중심으로 정보 구조와 화면을 설계하고, 디자인이 실제 웹 경험으로 이어지도록 구현했습니다.',
+      meta: [
+        ['ROLE', '기획 참여 · Support UI Design · Front-end'],
+        ['CONTRIBUTION', '서포트 페이지 디자인 · 프론트엔드 구현'],
+        ['AI UTILIZATION', 'Claude · Codex를 활용한 개발 및 수정'],
+        ['PERIOD', '2026.06.19 — 2026.07.03']
+      ]
     }
   };
 

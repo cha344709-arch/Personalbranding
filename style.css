@@ -214,6 +214,10 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .site-header.is-on-ivory .header-request{
   background:rgba(21,20,21,.1);
 }
+.site-header.is-on-ivory .header-nav{
+  background:rgba(218,212,202,.96);
+  padding-inline:2.5rem;
+}
 .site-header.is-on-ivory .header-nav__sep{background:rgba(21,20,21,.28);}
 .site-header.is-on-ivory .header-nav a:hover,
 .site-header.is-on-ivory .header-request:hover{

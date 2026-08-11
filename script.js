@@ -1025,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
       right: '소비 데이터를 분석해<br>절약이 필요한 지점과 다음 행동을<br>제안하는 AI 금융 코칭 서비스',
       bottomLeft: '단순한 소비 내역을 넘어, 사용자가 바로 실천할 수 있는 절약 방법과 목표의 변화를 이해하기 쉽게 설계했습니다.',
       id: 'ai-in-app',
-      url: 'object.html?id=ai-in-app'
+      url: 'https://ai-money-coach-dashboard.cha344709.chatgpt.site'
     },
     {
       topLeft: '나에게 어울리는 렌즈를<br>더 쉽고 정확하게.',
