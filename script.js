@@ -1226,10 +1226,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  updateCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      if (index !== activeUpdateIndex) showUpdate(index);
+    });
+  });
+
   if (updatesGrid) {
     let dragStartX = 0;
     let dragDistance = 0;
     let isDragging = false;
+    let wheelLocked = false;
 
     updatesGrid.addEventListener('pointerdown', event => {
       isDragging = true;
@@ -1250,7 +1257,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isDragging = false;
       updatesGrid.classList.remove('is-dragging');
       if (updatesGrid.hasPointerCapture(event.pointerId)) updatesGrid.releasePointerCapture(event.pointerId);
-      const threshold = Math.min(90, updatesGrid.clientWidth * .12);
+      const threshold = Math.min(42, updatesGrid.clientWidth * .06);
       if (dragDistance < -threshold) showUpdate(activeUpdateIndex + 1);
       else if (dragDistance > threshold) showUpdate(activeUpdateIndex - 1);
       else showUpdate(activeUpdateIndex);
@@ -1258,6 +1265,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updatesGrid.addEventListener('pointerup', finishUpdateDrag);
     updatesGrid.addEventListener('pointercancel', finishUpdateDrag);
+    updatesGrid.addEventListener('wheel', event => {
+      if (Math.abs(event.deltaX) < 18 || Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+      event.preventDefault();
+      if (wheelLocked) return;
+      wheelLocked = true;
+      showUpdate(activeUpdateIndex + (event.deltaX > 0 ? 1 : -1));
+      window.setTimeout(() => { wheelLocked = false; }, 500);
+    }, { passive:false });
   }
 
   /* ---- smooth in-page nav ---- */
