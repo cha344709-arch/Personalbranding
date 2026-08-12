@@ -697,21 +697,8 @@ document.addEventListener('DOMContentLoaded', () => {
       placesSlides.style.width = `${currentWidth}px`;
       placesSlides.style.height = `${currentHeight}px`;
 
-      /* Derive the leftward shift from the box's own current width rather
-         than a fixed rem value tied only to `expansion` — a fixed value
-         can't know how wide the box actually got partway through growing,
-         so it used to under-shift mid-transition and let the box's right
-         edge run under the (still narrow) text. Shifting by exactly
-         however much is needed to clear the reserved text space keeps
-         them apart at every frame, not just at the start and end. */
       const naturalRight = availableWidth / 2 + currentWidth / 2;
       const safeMaxRight = availableWidth - 480;
-      /* Scale by expansion so the shift is 0 in the resting/unscrolled
-         state (main photo stays perfectly centered) and only grows in as
-         the text actually fades into view — otherwise this fired even at
-         expansion 0 whenever the box's plain width alone left less than
-         the reserved text space, nudging everything left before there
-         was any text to make room for. */
       const requiredShift = expansion * Math.max(0, naturalRight - safeMaxRight);
       placesCarousel.style.setProperty('--places-shift-x', `${-requiredShift}px`);
 
@@ -746,10 +733,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const slidesRect = placesSlides.getBoundingClientRect();
           const photoBottom = stickyRect.bottom - slidesRect.bottom;
           const photoRight = slidesRect.right - stickyRect.left;
-          /* Cap how far right the text can sit so it can never run past
-             the viewport edge and get clipped — once the photo grows wide
-             enough to leave no room after it, the text backs off in front
-             of it instead of overflowing. */
           const maxLeft = stickyRect.width - placesStatement.offsetWidth - 32;
           placesStatement.style.top = 'auto';
           placesStatement.style.bottom = `${photoBottom}px`;

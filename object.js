@@ -125,6 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const id = new URLSearchParams(window.location.search).get('id');
   const data = OBJECTS[id] || OBJECTS.viner;
 
+  const deckUrls = {
+    viner: 'https://www.figma.com/design/Sp0c7E2UOo3XBCxNEbnjFn/2%EC%B0%A8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8--2%EC%A1%B0?node-id=2216-426&m=dev',
+    marshall: 'https://www.figma.com/design/5hidJ6AOILIhWlTzMzadVy/1%EC%B0%A8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-2%EC%A1%B0?node-id=3937-155&m=dev'
+  };
+  const detailAction = document.getElementById('objectDetailAction');
+  const selectedDeckUrl = deckUrls[id || 'viner'];
+  if (selectedDeckUrl) {
+    detailAction.href = selectedDeckUrl;
+    detailAction.target = '_blank';
+    detailAction.rel = 'noopener';
+    detailAction.innerHTML = 'Figma에서 장표 보기&nbsp;&nearr;';
+  }
+
   document.title = `${data.name} — CHA KYEONG AH`;
 
   const image = document.getElementById('objectDetailImage');
