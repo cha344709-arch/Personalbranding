@@ -1127,14 +1127,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (objectMergeRight) objectMergeRight.innerHTML = copy.right;
       if (objectMergeBottomLeft) objectMergeBottomLeft.innerHTML = copy.bottomLeft;
       if (objectMergeLink) {
-        objectMergeLink.href = copy.url;
-        if (copy.url.startsWith('http')) {
-          objectMergeLink.target = '_blank';
-          objectMergeLink.rel = 'noopener';
-        } else {
-          objectMergeLink.removeAttribute('target');
-          objectMergeLink.removeAttribute('rel');
-        }
+        objectMergeLink.href = '#objects';
+        objectMergeLink.removeAttribute('target');
+        objectMergeLink.removeAttribute('rel');
       }
     }
     if (objectsButterflyGradient) {
@@ -1152,6 +1147,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', requestPortfolioMotion);
   scrollResyncFns.push(requestPortfolioMotion);
   updatePortfolioMotion();
+
+  objectMergeLink?.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (!objectsScroll) return;
+    const scrollable = objectsScroll.offsetHeight - document.documentElement.clientHeight;
+    const gridProgress = .36;
+    const targetTop = window.scrollY + objectsScroll.getBoundingClientRect().top + scrollable * gridProgress;
+    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+  });
 
   /* ---- click a grid card to open that object's own detail page ---- */
   const objectPageIds = ['viner', 'ai-in-app', 'eyeum', 'marshall'];

@@ -930,7 +930,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .updates__col.is-active{opacity:1;pointer-events:auto;}
 .updates__grid.is-dragging + .updates__info .updates__col{transition:none;}
 .updates__tag{font-family:var(--font-b-medium);font-size:var(--fs-mm);letter-spacing:.08em;text-transform:uppercase;color:rgba(21,20,21,.55);}
-.updates__headline{font-family:var(--font-t-2);font-size:var(--fs-h6);text-transform:uppercase;}
+.updates__headline{font-family:var(--font-t-2);font-size:var(--fs-h6);letter-spacing:-.04em;text-transform:uppercase;}
 .updates__col p{margin:0;font-size:var(--fs-m);color:rgba(21,20,21,.6);}
 .updates__pager{position:relative;z-index:1;display:flex;justify-content:center;gap:.8rem;}
 .updates__pager li{
