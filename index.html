@@ -6,7 +6,7 @@
 <title>The Obsidian Assembly</title>
 <meta name="description" content="The Obsidian Assembly is an independent organization coordinating distributed spaces, operations, and product development across multiple locations.">
 <meta name="theme-color" content="#151415">
-<link rel="stylesheet" href="style.css?v=77">
+<link rel="stylesheet" href="style.css?v=78">
 </head>
 <body>
 
@@ -44,18 +44,21 @@
 
 <!-- Fullscreen Menu Overlay -->
 <div class="menu-overlay" id="menuOverlay">
+  <a href="#top" class="menu-overlay__logo" aria-label="홈으로 이동">
+    <img src="./img/CHA-KYEONG-AH-logo.png?v=2" alt="CHA KYEONG AH">
+  </a>
   <button class="menu-close" id="menuClose">Close</button>
-  <button class="menu-x" id="menuX" aria-label="닫기">&times;</button>
   <div class="menu-overlay__body">
-    <div class="menu-overlay__badge">
-      <span class="menu-overlay__icon">&#129418;</span>
-      <span>Navigation</span>
-    </div>
     <nav class="menu-overlay__nav">
-      <a href="#places" class="mnav mnav--1">About</a>
-      <a href="#objects" class="mnav mnav--2">Projects</a>
-      <a href="#admission" class="mnav mnav--3">Contact</a>
+      <a href="#places" class="mnav mnav--1"><span>01</span><strong>About</strong></a>
+      <a href="#objects" class="mnav mnav--2"><span>02</span><strong>Projects</strong></a>
+      <a href="#admission" class="mnav mnav--3"><span>03</span><strong>Contact</strong></a>
     </nav>
+  </div>
+  <div class="menu-overlay__footer">
+    <a href="mailto:cha5593@naver.com">cha5593@naver.com</a>
+    <a href="https://github.com/cha344709-arch" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <span>&copy; 2026 CHA KYEONG AH</span>
   </div>
 </div>
 
@@ -277,20 +280,20 @@
     </div>
 
     <div class="updates__grid reveal">
-      <figure class="updates__card"><img src="img/Iksan Cultural Foundation.png" alt="익산문화재단 브랜딩 프로젝트"></figure>
-      <figure class="updates__card is-active"><img src="img/Gyeol Sim Makgeolli.png" alt="결심 막걸리 브랜딩 프로젝트"></figure>
+      <figure class="updates__card is-active"><img src="img/Iksan Cultural Foundation.png" alt="익산문화재단 브랜딩 프로젝트"></figure>
+      <figure class="updates__card"><img src="img/Gyeol Sim Makgeolli.png" alt="결심 막걸리 브랜딩 프로젝트"></figure>
       <figure class="updates__card"><img src="img/Poster magazine design.png" alt="아떼 포스터 매거진 디자인"></figure>
       <figure class="updates__card"><img src="img/HERA.png" alt="헤라 블랙 쿠션 상세 페이지 리디자인"></figure>
       <figure class="updates__card"><img src="img/HERA2.png" alt="헤라 센슈얼 피팅 글로우 틴트 상세 페이지 리디자인"></figure>
     </div>
 
     <div class="updates__info reveal">
-      <div class="updates__col">
+      <div class="updates__col updates__col--main is-active">
         <span class="updates__tag">Brand Identity</span>
         <span class="updates__headline">Iksan Cultural Foundation</span>
         <p>익산의 문화와 지역성을 담아낸 문화재단 브랜딩 프로젝트입니다.</p>
       </div>
-      <div class="updates__col updates__col--main is-active">
+      <div class="updates__col">
         <span class="updates__tag">Local Branding</span>
         <span class="updates__headline">Gyeol Sim Makgeolli</span>
         <p>익산의 장소와 이야기를 담아낸 지역 막걸리 브랜드 프로젝트입니다.</p>
@@ -313,8 +316,8 @@
     </div>
 
     <ol class="updates__pager reveal" id="updatesList">
-      <li data-img="img/Iksan Cultural Foundation.png" data-tag="Brand Identity" data-headline="Iksan Cultural Foundation" data-text="익산의 문화와 지역성을 담아낸 문화재단 브랜딩 프로젝트입니다.">1</li>
-      <li class="is-active" data-img="img/Gyeol Sim Makgeolli.png" data-tag="Local Branding" data-headline="Gyeol Sim Makgeolli" data-text="익산의 장소와 이야기를 담아낸 지역 막걸리 브랜드 프로젝트입니다.">2</li>
+      <li class="is-active" data-img="img/Iksan Cultural Foundation.png" data-tag="Brand Identity" data-headline="Iksan Cultural Foundation" data-text="익산의 문화와 지역성을 담아낸 문화재단 브랜딩 프로젝트입니다.">1</li>
+      <li data-img="img/Gyeol Sim Makgeolli.png" data-tag="Local Branding" data-headline="Gyeol Sim Makgeolli" data-text="익산의 장소와 이야기를 담아낸 지역 막걸리 브랜드 프로젝트입니다.">2</li>
       <li data-img="img/Poster magazine design.png" data-tag="Editorial Design" data-headline="Ath&eacute; Beauty Editorial" data-text="아떼의 제품과 비주얼을 구성한 포스터 매거진 디자인 프로젝트입니다.">3</li>
       <li data-img="img/HERA.png" data-tag="Web Page Redesign · Beauty" data-headline="Hera Black Cushion" data-text="헤라 블랙 쿠션의 제품 특징과 브랜드 이미지를 새롭게 구성한 상세 페이지 리디자인 프로젝트입니다.">4</li>
       <li data-img="img/HERA2.png" data-tag="Web Page Redesign · Beauty" data-headline="Hera Sensual Fitting Glow Tint" data-text="헤라 센슈얼 피팅 글로우 틴트의 컬러와 제품 이미지를 새롭게 구성한 상세 페이지 리디자인 프로젝트입니다.">5</li>
@@ -387,6 +390,6 @@
   </form>
 </div>
 
-<script src="script.js?v=58"></script>
+<script src="script.js?v=60"></script>
 </body>
 </html>

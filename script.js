@@ -863,7 +863,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const menuOverlay = document.getElementById('menuOverlay');
   const menuClose = document.getElementById('menuClose');
-  const menuX = document.getElementById('menuX');
 
   const openMenu = () => {
     stopSmoothScroll();
@@ -877,7 +876,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   menuToggle.addEventListener('click', openMenu);
   menuClose.addEventListener('click', closeMenu);
-  menuX.addEventListener('click', closeMenu);
   menuOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
   /* ---- reveal on scroll ---- */
@@ -1190,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pagerItems = document.querySelectorAll('.updates__pager li');
   const updateCards = [...document.querySelectorAll('.updates__card')];
   const updateCols = [...document.querySelectorAll('.updates__info .updates__col')];
-  let activeUpdateIndex = 1;
+  let activeUpdateIndex = 0;
   const positionUpdateCards = (activeIndex, dragOffset = 0) => {
     updateCards.forEach((card, cardIndex) => {
       const offset = cardIndex - activeIndex;
