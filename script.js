@@ -553,6 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let requestPlacesAmbientRecalc = null;
   const placesStory = document.getElementById('placesScroll');
   if (placesStory && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const aboutContent = placesStory.querySelector('.about-content');
     const placesCarousel = placesStory.querySelector('.places__carousel');
     const placesSlides = placesCarousel.querySelector('.places__slides');
     const placesBaseSlidesHeight = placesSlides.offsetHeight;
@@ -630,13 +631,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = placesStory.getBoundingClientRect();
       const scrollable = placesStory.offsetHeight - document.documentElement.clientHeight;
       const progress = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
-      /* Narrower than it used to be (was /0.28): that gave the scattered
-         grid → gathered-photo transition ~500px of scroll to play out,
-         which is a wide enough target that landing mid-transition (a
-         refresh, or a scroll that stops on its own momentum) was common
-         and looked like broken/overlapping layout rather than an
-         animation in progress. */
-      const expansion = smoothstep(clamp01(progress / 0.14));
+      /* Give the scattered grid → portrait transition enough scroll
+         distance to ease between both states without a sudden jump. */
+      const expansion = smoothstep(clamp01(progress / 0.32));
       const shrinking = smoothstep(clamp01((progress - 0.68) / 0.32));
       /* The grid photos fading out and the bio text fading in used to
          both be driven directly off `expansion`, so for the whole middle
@@ -670,6 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const carouselWidth = placesCarousel.offsetWidth;
+      aboutContent.style.transform = 'none';
       const availableWidth = placesStory.clientWidth;
       const coverScale = availableWidth / carouselWidth;
       const expandedScale = 1 + expansion * (coverScale - 1);
@@ -727,18 +725,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const statementOpacity = textReveal * (1 - shrinking);
         placesStatement.style.opacity = statementOpacity;
         placesStatement.style.pointerEvents = statementOpacity > 0.05 ? 'auto' : 'none';
-        const stickyEl = placesStatement.offsetParent;
-        if (stickyEl) {
-          const stickyRect = stickyEl.getBoundingClientRect();
-          const slidesRect = placesSlides.getBoundingClientRect();
-          const photoBottom = stickyRect.bottom - slidesRect.bottom;
-          const photoRight = slidesRect.right - stickyRect.left;
-          const maxLeft = stickyRect.width - placesStatement.offsetWidth - 32;
-          placesStatement.style.top = 'auto';
-          placesStatement.style.bottom = `${photoBottom}px`;
-          placesStatement.style.left = `${Math.min(photoRight - 88, maxLeft)}px`;
-          placesStatement.style.right = 'auto';
-          placesStatement.style.transform = 'none';
+        const contentRect = aboutContent.getBoundingClientRect();
+        const slidesRect = placesSlides.getBoundingClientRect();
+        const photoBottom = contentRect.bottom - slidesRect.bottom;
+        const photoRight = slidesRect.right - contentRect.left;
+        const maxLeft = contentRect.width - placesStatement.offsetWidth - 32;
+        placesStatement.style.top = 'auto';
+        placesStatement.style.bottom = `${photoBottom}px`;
+        placesStatement.style.left = `${Math.min(photoRight - 88, maxLeft)}px`;
+        placesStatement.style.right = 'auto';
+        placesStatement.style.transform = 'none';
+
+        if (statementOpacity > 0.001) {
+          /* Move the complete photo + copy group left. Keep Y locked to 0. */
+          aboutContent.style.transform = 'translate3d(-5vw,2vh,0)';
+
+          const centeredPhotoRect = placesSlides.getBoundingClientRect();
+          const centeredStatementRect = placesStatement.getBoundingClientRect();
+          aboutContent.dataset.photoLeft = centeredPhotoRect.left.toFixed(2);
+          aboutContent.dataset.statementRight = centeredStatementRect.right.toFixed(2);
         }
       }
     };
