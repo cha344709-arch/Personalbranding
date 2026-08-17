@@ -348,6 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
         answer: '작업할 때 전체적인 흐름을 먼저 파악한 뒤, 사용자가 가장 불편하다고 느끼는 지점을 찾아내는 것부터 시작합니다. 문제를 발견하면 원인을 찾을 때까지 파고드는 편이고, 주어진 일에는 끝까지 열심히 임하는 성향입니다. 예를 들어 컬러렌즈를 구매할 때 저에게 안 어울리거나 직경이 맞지 않아 돈을 낭비했던 경험을 그냥 넘기지 않고, 그 불편함을 직접 해결하기 위해 개인 프로젝트인 EYEUM을 기획하고 만들었습니다. 이 과정에서 AI를 최대한 활용해 더 편안하고 안정적인 결과를 만드는 것을 중요하게 생각합니다.'
       },
       {
+        id: 'workflow',
+        label: '역할과 기여도',
+        keywords: ['역할', '기여도', '기여', '디자인 개발', '개발 방식', '디자인 방식'],
+        answer: '프로젝트에서는 사용자 흐름과 화면 구조를 설계하는 UX/UI 디자인부터 HTML/CSS 기반의 프론트엔드 구현까지 연결해서 작업합니다. 팀 프로젝트에서는 기획에 참여하고 맡은 화면의 디자인과 구현을 책임지며, 개인 프로젝트에서는 문제 정의부터 배포와 개선까지 전체 과정을 직접 진행합니다.'
+      },
+      {
         id: 'weakness',
         label: '보완하고 싶은 점',
         keywords: ['보완', '약점', '단점', '부족', '아쉬운'],
@@ -367,9 +373,39 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       {
         id: 'projects',
-        label: '프로젝트',
+        label: '주요 프로젝트',
         keywords: ['프로젝트', 'eyeum', '아이음', 'marshall', '마샬', 'viner', '바이너', '와인', '인앱', '포트폴리오', '작업물'],
         answer: 'EYEUM (아이음) — 컬러렌즈 앱\nAR 착용 프리뷰와 개인 맞춤 렌즈 추천 기능이 있는 모바일 웹 프로토타입을 기획부터 프론트엔드 구현까지 전부 담당했습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 브랜드 아이덴티티 설계부터 UX 기획서 작성, 10개 화면 HTML/CSS 프로토타입 제작과 배포까지 기획·디자인·구현을 혼자 끝까지 이어가는 데 집중했습니다.\n\nMarshall 웹 리브랜딩 (팀 프로젝트)\n마샬 브랜드의 웹을 리브랜딩하는 팀 프로젝트에서 기획에 참여하고 서브페이지 디자인과 프론트엔드 구현을 맡았습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 서브페이지의 디자인 완성도와 이를 실제 코드로 옮기는 프론트엔드 구현에 집중했습니다.\n\nViner 와인 커뮤니티 모바일 웹\n와인 커뮤니티 모바일 웹 서비스에서 기획 참여, 프론트엔드 개발, 웹 퍼블리싱, 테스트 및 수정·보완까지 전 과정에 참여했습니다.\n사용 툴: Figma, VS Code, Claude, Codex\n중심 작업: 그중에서도 VS Code로 직접 구현하고 수정하는 작업에 특히 비중을 많이 뒀습니다.\n\nAI 활용 프로젝트 (인앱 금융 대시보드)\n디자인 완성도보다 AI를 얼마나 잘 활용했는지를 보여주는 데 목적을 둔 대시보드형 앱을 기획부터 구현까지 전부 담당했습니다.\n사용 툴: Figma, VS Code, Codex\n중심 작업: AI를 실제 작업 흐름에 어떻게 녹여내는지를 보여주는 것 자체가 핵심이었습니다.'
+      },
+      {
+        id: 'eyeum-project',
+        label: 'EYEUM',
+        keywords: ['eyeum', '아이음'],
+        answer: 'EYEUM은 컬러렌즈를 고를 때 색상이나 직경이 나에게 맞지 않아 생기는 불편을 해결하기 위해 만든 개인 프로젝트입니다. AR 착용 프리뷰와 맞춤 추천을 중심으로 기획했으며, 브랜드 아이덴티티와 UX 설계부터 10개 화면의 HTML/CSS 프로토타입 제작과 배포까지 전 과정을 직접 담당했습니다.'
+      },
+      {
+        id: 'viner-project',
+        label: 'VINER',
+        keywords: ['viner', '바이너', '와인'],
+        answer: 'VINER는 와인을 발견하고 기록하며 비슷한 취향의 사용자와 연결되는 와인 커뮤니티 모바일 웹입니다. 기획 참여, 프론트엔드 개발, 웹 퍼블리싱, 테스트와 수정·보완까지 참여했고, 특히 VS Code에서 직접 구현하고 개선하는 작업에 집중했습니다.'
+      },
+      {
+        id: 'marshall-project',
+        label: 'Marshall',
+        keywords: ['marshall', '마샬'],
+        answer: 'Marshall 웹 리브랜딩은 브랜드의 역사와 아날로그 감성을 디지털 경험으로 전달한 팀 프로젝트입니다. 기획에 참여하고 서브페이지 UX/UI 디자인과 프론트엔드 구현을 맡아 디자인을 실제 인터랙션과 화면으로 옮겼습니다.'
+      },
+      {
+        id: 'ai-money-project',
+        label: 'AI Money Coach',
+        keywords: ['ai money', 'money coach', '머니 코치', '인앱 금융'],
+        answer: 'AI Money Coach는 소비 데이터를 분석해 절약이 필요한 지점과 다음 행동을 제안하는 대시보드형 앱입니다. AI 활용 역량을 보여주는 것을 핵심 목표로 삼아 기획부터 화면 구성, 프론트엔드 구현까지 직접 진행했습니다.'
+      },
+      {
+        id: 'ai-projects',
+        label: 'AI를 활용한 프로젝트',
+        keywords: ['ai 프로젝트', 'ai를 활용한 프로젝트'],
+        answer: '대표적인 AI 활용 프로젝트는 AI Money Coach입니다. 아이디어 구체화와 사용자 흐름 설계부터 코드 작성과 오류 개선까지 Codex와 Claude를 작업 과정에 활용했고, AI가 실제 제작 흐름 안에서 어떻게 기능하는지를 결과물로 보여주는 데 집중했습니다.'
       },
       {
         id: 'goals',
@@ -384,6 +420,15 @@ document.addEventListener('DOMContentLoaded', () => {
         answer: '이메일: cha5593@naver.com\n전화번호: 010-2759-5498'
       }
     ];
+
+    const INITIAL_TOPIC_IDS = ['intro', 'workflow', 'ai', 'projects', 'contact'];
+    const FOLLOW_UP_TOPIC_IDS = {
+      intro: ['why-uxui', 'goals'],
+      workflow: ['strengths', 'weakness'],
+      ai: ['tools', 'ai-projects'],
+      projects: ['eyeum-project', 'viner-project', 'marshall-project', 'ai-money-project']
+    };
+    const shownFollowUpGroups = new Set();
 
     const CHAT_FALLBACK = '죄송합니다, 그 부분은 답변해드리기 어렵습니다. 궁금하신 점은 아래 연락처로 문의해주세요.\n\n이메일: cha5593@naver.com\n전화번호: 010-2759-5498';
 
@@ -409,18 +454,59 @@ document.addEventListener('DOMContentLoaded', () => {
          follow its rising top edge instead of staying at the height it
          opened at */
       requestFairyPosition();
+      return msg;
+    };
+
+    const getTopicById = (id) => KYEONG_AH_TOPICS.find((topic) => topic.id === id);
+
+    const scrollToChatMessage = (message) => {
+      requestAnimationFrame(() => {
+        message?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        requestFairyPosition();
+      });
+    };
+
+    const appendTopicAnswer = (topic) => {
+      const answerMessage = appendMessage(topic.answer, 'bot');
+      const followUpIds = FOLLOW_UP_TOPIC_IDS[topic.id] || [];
+
+      if (followUpIds.length && !shownFollowUpGroups.has(topic.id)) {
+        shownFollowUpGroups.add(topic.id);
+        const followUps = document.createElement('div');
+        followUps.className = 'fairy-chat__followups';
+
+        followUpIds.slice(0, 4).forEach((id) => {
+          const followUpTopic = getTopicById(id);
+          if (!followUpTopic) return;
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'fairy-chat__followup';
+          button.textContent = followUpTopic.label;
+          button.addEventListener('click', () => {
+            followUps.remove();
+            appendMessage(followUpTopic.label, 'user');
+            const nextAnswer = appendTopicAnswer(followUpTopic);
+            scrollToChatMessage(nextAnswer);
+          });
+          followUps.appendChild(button);
+        });
+        chatLog.appendChild(followUps);
+      }
+
+      scrollToChatMessage(answerMessage);
+      return answerMessage;
     };
 
     const renderQuickReplies = () => {
       chatQuick.innerHTML = '';
-      KYEONG_AH_TOPICS.forEach((topic) => {
+      INITIAL_TOPIC_IDS.map(getTopicById).filter(Boolean).forEach((topic) => {
         const chip = document.createElement('button');
         chip.type = 'button';
         chip.className = 'fairy-chat__chip';
         chip.textContent = topic.label;
         chip.addEventListener('click', () => {
           appendMessage(topic.label, 'user');
-          appendMessage(topic.answer, 'bot');
+          appendTopicAnswer(topic);
         });
         chatQuick.appendChild(chip);
       });
@@ -470,7 +556,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!value) return;
       appendMessage(value, 'user');
       const topic = findTopic(value);
-      appendMessage(topic ? topic.answer : CHAT_FALLBACK, 'bot');
+      if (topic) appendTopicAnswer(topic);
+      else scrollToChatMessage(appendMessage(CHAT_FALLBACK, 'bot'));
       chatInput.value = '';
     });
   }
