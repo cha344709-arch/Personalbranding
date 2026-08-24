@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const data = OBJECTS[id] || OBJECTS.viner;
 
   const deckUrls = {
-    viner: 'https://www.figma.com/design/Sp0c7E2UOo3XBCxNEbnjFn/2%EC%B0%A8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8--2%EC%A1%B0?node-id=2216-426&m=dev',
+    viner: 'https://drive.google.com/file/d/1reS4O_iV9PcuZp6FREZguyaP7UCP1q4v/view?usp=sharing',
     marshall: 'https://drive.google.com/file/d/1LwIDIBZg29SB01glA2GzUQUbcMfXY1ug/view?usp=sharing'
   };
   const deckLabels = {
-    viner: 'Figma에서 장표 보기',
+    viner: 'VINER장표보기',
     marshall: 'MARSHALL장표보기'
   };
   const liveUrls = {
