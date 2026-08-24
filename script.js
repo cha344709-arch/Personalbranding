@@ -41,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     viewportFrame = 0;
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
-    const referenceHeight = Math.min(height, 1000);
-    const referenceWidth = Math.min(width, 1728);
+    const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const referenceHeight = fixedDesktop ? 1000 : Math.min(height, 1000);
+    const referenceWidth = fixedDesktop ? 1728 : Math.min(width, 1728);
     root.style.setProperty('--app-height', `${height}px`);
     root.style.setProperty('--app-height-115', `${Math.round(height * 1.15)}px`);
     root.style.setProperty('--app-vh', `${referenceHeight / 100}px`);
@@ -1155,7 +1156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Keep the 1920/2048px reference composition, but stop ultrawide
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
-    const referenceWidth = Math.min(viewportWidth, 1728);
+    const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const referenceWidth = fixedDesktop ? 1728 : Math.min(viewportWidth, 1728);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
       : Math.max(referenceWidth * 0.78, 800);
