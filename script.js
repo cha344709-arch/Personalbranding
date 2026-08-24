@@ -46,7 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const referenceHeight = fixedDesktop ? 1000 : Math.min(height, 1000);
     const referenceWidth = fixedDesktop ? 1728 : Math.min(width, 1728);
     const layoutHeight = fixedDesktop ? 1000 : height;
+    const canvasGutter = fixedDesktop
+      ? Math.max(0, (width / layoutScale - 1728) / 2)
+      : 0;
     root.style.setProperty('--canvas-scale', layoutScale.toFixed(6));
+    root.style.setProperty('--canvas-gutter', `${canvasGutter.toFixed(3)}px`);
     root.style.setProperty('--layout-scale', fixedDesktop ? '1' : layoutScale.toFixed(6));
     root.style.setProperty('--app-height', `${Math.round(layoutHeight)}px`);
     root.style.setProperty('--app-height-115', `${Math.round(layoutHeight * 1.15)}px`);

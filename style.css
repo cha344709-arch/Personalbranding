@@ -108,6 +108,7 @@
   --app-vh:min(1vh,.5787037vw);
   --app-vw:min(1vw,1.728vh);
   --layout-scale:1;
+  --canvas-gutter:0px;
 }
 
 @media (hover:none) and (max-width:768px){ :root{ --pad:1.25rem; } }
@@ -410,7 +411,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 }
 .hero::after{
   content:"";
-  position:absolute;left:0;right:0;bottom:-1px;height:calc(var(--app-vh) * 42);z-index:2;
+  position:absolute;left:calc(var(--canvas-gutter) * -1);right:calc(var(--canvas-gutter) * -1);bottom:-1px;height:calc(var(--app-vh) * 42);z-index:2;
   pointer-events:none;
   background:linear-gradient(
     180deg,
@@ -422,7 +423,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
   );
 }
 .hero__bg{
-  position:absolute;inset:0;z-index:0;
+  position:absolute;top:0;bottom:0;left:calc(var(--canvas-gutter) * -1);right:calc(var(--canvas-gutter) * -1);z-index:0;
   background:
     linear-gradient(180deg,rgba(21,20,21,0) 55%,var(--c-black) 100%),
     linear-gradient(160deg,#8a6a4d 0%,#c9ad8c 35%,#e7d6bd 60%,#c9ad8c 100%);
@@ -536,6 +537,33 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
       var(--c-black) 100%
     );
   pointer-events:none;
+}
+.hero-places-spacer::before,
+.places::before,
+.objects::before,
+.connection::before,
+.updates::before,
+.admission::before,
+.site-footer__card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:calc(var(--canvas-gutter) * -1);
+  right:calc(var(--canvas-gutter) * -1);
+  z-index:-1;
+  background:inherit;
+  pointer-events:none;
+}
+.hero-places-spacer,
+.places,
+.places-after,
+.objects,
+.connection,
+.updates,
+.admission,
+.site-footer__card{
+  isolation:isolate;
 }
 
 /* ---------- scroll-pin (Places / Objects scroll-driven carousels) ---------- */
@@ -704,6 +732,17 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
   background:var(--c-black);
   clip-path:path("M 0 0 H 144 C 110 0 82 18 72 88 C 62 18 34 0 0 0 Z");
   z-index:2;
+  pointer-events:none;
+}
+.places-after::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:calc(var(--canvas-gutter) * -1);
+  right:calc(var(--canvas-gutter) * -1);
+  z-index:-1;
+  background:var(--c-yellow);
   pointer-events:none;
 }
 .places-after__photo{
