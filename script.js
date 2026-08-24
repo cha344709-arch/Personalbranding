@@ -1098,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', () => {
       right: '소비 데이터를 분석해<br>절약이 필요한 지점과 다음 행동을<br>제안하는 AI 금융 코칭 서비스',
       bottomLeft: '단순한 소비 내역을 넘어, 사용자가 바로 실천할 수 있는 절약 방법과 목표의 변화를 이해하기 쉽게 설계했습니다.',
       id: 'ai-in-app',
-      url: 'https://ai-money-coach-dashboard.cha344709.chatgpt.site'
+      url: 'https://ai-money-coach-recovered-final.vercel.app/'
     },
     {
       topLeft: '나에게 어울리는 렌즈를<br>더 쉽고 정확하게.',
@@ -1148,12 +1148,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealProgress = clamp01(progress / .4);
     const stackProgress = clamp01((progress - .4) / .6);
     const isStack = progress >= .4;
-    const travel = window.innerWidth <= 600 ? 92 : 78;
-    const cardSpacing = window.innerWidth <= 600 ? 23 : 20;
+    /* Keep the 1920/2048px reference composition, but stop ultrawide
+       monitors from multiplying the card/title travel without a limit. */
+    const viewportWidth = document.documentElement.clientWidth;
+    const travel = window.innerWidth <= 600
+      ? Math.min(viewportWidth * 0.92, 552)
+      : Math.min(Math.max(viewportWidth * 0.78, 800), 1598);
+    const cardSpacing = window.innerWidth <= 600
+      ? Math.min(viewportWidth * 0.23, 138)
+      : Math.min(Math.max(viewportWidth * 0.2, 180), 410);
 
     portfolioTitle.style.setProperty('--portfolio-progress', revealProgress.toFixed(4));
-    portfolioTitle.style.setProperty('--portfolio-shift-left', `${-travel * revealProgress}vw`);
-    portfolioTitle.style.setProperty('--portfolio-shift-right', `${travel * revealProgress}vw`);
+    portfolioTitle.style.setProperty('--portfolio-shift-left', `${-travel * revealProgress}px`);
+    portfolioTitle.style.setProperty('--portfolio-shift-right', `${travel * revealProgress}px`);
     portfolioTitle.style.setProperty('--portfolio-scale', Math.max(.18, 1 - revealProgress * .82).toFixed(4));
     portfolioTitle.style.visibility = isStack ? 'hidden' : 'visible';
     portfolioSlidesCanvas?.classList.toggle('is-card-stack', isStack);
@@ -1186,7 +1193,7 @@ document.addEventListener('DOMContentLoaded', () => {
            actually start fading in. */
         slide.style.visibility = local > 0.001 ? 'visible' : 'hidden';
         slide.style.setProperty('--object-card-opacity', Math.min(1, local * 2).toFixed(4));
-        slide.style.setProperty('--object-card-shift', `${(gridPosition * cardSpacing).toFixed(4)}vw`);
+        slide.style.setProperty('--object-card-shift', `${(gridPosition * cardSpacing).toFixed(4)}px`);
         slide.style.setProperty('--object-card-y', `${(2 - local * 4).toFixed(4)}vh`);
         slide.style.setProperty('--object-card-scale', (.5 + local / 2).toFixed(4));
         slide.style.setProperty('--object-card-layer', String(index + 1));
