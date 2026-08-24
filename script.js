@@ -40,9 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const syncViewportHeight = () => {
     viewportFrame = 0;
     const height = Math.round(document.documentElement.clientHeight);
+    const width = Math.round(document.documentElement.clientWidth);
+    const referenceHeight = Math.min(height, 1000);
+    const referenceWidth = Math.min(width, 1728);
     root.style.setProperty('--app-height', `${height}px`);
     root.style.setProperty('--app-height-115', `${Math.round(height * 1.15)}px`);
-    root.style.setProperty('--app-vh', `${height / 100}px`);
+    root.style.setProperty('--app-vh', `${referenceHeight / 100}px`);
+    root.style.setProperty('--app-vw', `${referenceWidth / 100}px`);
     document.querySelectorAll('.scroll-pin').forEach((pin) => {
       const slides = Number.parseFloat(getComputedStyle(pin).getPropertyValue('--slides')) || 1;
       const multiplier = window.innerWidth <= 768 ? 0.65 : 0.9;
@@ -1151,12 +1155,13 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Keep the 1920/2048px reference composition, but stop ultrawide
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
+    const referenceWidth = Math.min(viewportWidth, 1728);
     const travel = window.innerWidth <= 600
-      ? Math.min(viewportWidth * 0.92, 552)
-      : Math.min(Math.max(viewportWidth * 0.78, 800), 1598);
+      ? referenceWidth * 0.92
+      : Math.max(referenceWidth * 0.78, 800);
     const cardSpacing = window.innerWidth <= 600
-      ? Math.min(viewportWidth * 0.23, 138)
-      : Math.min(Math.max(viewportWidth * 0.2, 180), 410);
+      ? referenceWidth * 0.23
+      : Math.max(referenceWidth * 0.2, 180);
 
     portfolioTitle.style.setProperty('--portfolio-progress', revealProgress.toFixed(4));
     portfolioTitle.style.setProperty('--portfolio-shift-left', `${-travel * revealProgress}px`);
