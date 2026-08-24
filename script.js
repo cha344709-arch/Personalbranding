@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- one viewport-height source for Chrome / Safari / Firefox ---- */
   const root = document.documentElement;
+  const DESIGN_WIDTH = 1920;
+  const DESIGN_HEIGHT = 1080;
   const designViewportHeight = () => Number.parseFloat(
     getComputedStyle(root).getPropertyValue('--app-height')
   ) || document.documentElement.clientHeight;
@@ -45,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? width / 1728 : 1;
-    const referenceHeight = fixedDesktop ? 1000 * layoutScale : Math.min(height, 1000);
-    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(width, 1728);
+    const layoutScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
+    const referenceHeight = fixedDesktop ? DESIGN_HEIGHT * layoutScale : Math.min(height, DESIGN_HEIGHT);
+    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * layoutScale : Math.min(width, DESIGN_WIDTH);
     const layoutHeight = fixedDesktop ? referenceHeight : height;
     root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
     root.style.setProperty('--app-height', `${Math.round(layoutHeight)}px`);
@@ -1163,8 +1165,8 @@ document.addEventListener('DOMContentLoaded', () => {
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? viewportWidth / 1728 : 1;
-    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(viewportWidth, 1728);
+    const layoutScale = fixedDesktop ? viewportWidth / DESIGN_WIDTH : 1;
+    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * layoutScale : Math.min(viewportWidth, DESIGN_WIDTH);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
       : referenceWidth * 0.78;
