@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const deckLabels = {
     viner: 'Figma에서 장표 보기',
-    marshall: 'PDF 장표 보기'
+    marshall: 'MARSHALL장표보기'
   };
   const liveUrls = {
     'ai-in-app': 'https://ai-money-coach-recovered-final.vercel.app/'
