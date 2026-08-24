@@ -142,7 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const deckUrls = {
     viner: 'https://www.figma.com/design/Sp0c7E2UOo3XBCxNEbnjFn/2%EC%B0%A8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8--2%EC%A1%B0?node-id=2216-426&m=dev',
-    marshall: 'https://www.figma.com/design/5hidJ6AOILIhWlTzMzadVy/1%EC%B0%A8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-2%EC%A1%B0?node-id=3937-155&m=dev'
+    marshall: 'https://drive.google.com/file/d/1LwIDIBZg29SB01glA2GzUQUbcMfXY1ug/view?usp=sharing'
+  };
+  const deckLabels = {
+    viner: 'Figma에서 장표 보기',
+    marshall: 'PDF 장표 보기'
   };
   const liveUrls = {
     'ai-in-app': 'https://ai-money-coach-recovered-final.vercel.app/'
@@ -158,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
   } else if (selectedDeckUrl) {
     detailAction.href = selectedDeckUrl;
     detailAction.target = '_blank';
-    detailAction.rel = 'noopener';
-    detailAction.innerHTML = 'Figma에서 장표 보기&nbsp;&nearr;';
+    detailAction.rel = 'noopener noreferrer';
+    detailAction.innerHTML = `${deckLabels[id] || '장표 보기'}&nbsp;&nearr;`;
   }
 
   document.title = `${data.name} — CHA KYEONG AH`;
