@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = document.documentElement.clientWidth;
     const height = document.documentElement.clientHeight;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? Math.min(width / 1728, height / 1000) : 1;
+    const layoutScale = fixedDesktop ? width / 1728 : 1;
     root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
     root.style.setProperty('--app-vw', `${(1728 * layoutScale) / 100}px`);
     root.style.setProperty('--app-vh', `${(1000 * layoutScale) / 100}px`);

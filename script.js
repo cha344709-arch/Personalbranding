@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- one viewport-height source for Chrome / Safari / Firefox ---- */
   const root = document.documentElement;
+  const designViewportHeight = () => Number.parseFloat(
+    getComputedStyle(root).getPropertyValue('--app-height')
+  ) || document.documentElement.clientHeight;
   let viewportFrame = 0;
 
   const syncViewportHeight = () => {
@@ -42,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? Math.min(width / 1728, height / 1000) : 1;
+    const layoutScale = fixedDesktop ? width / 1728 : 1;
     const referenceHeight = fixedDesktop ? 1000 * layoutScale : Math.min(height, 1000);
     const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(width, 1728);
     const layoutHeight = fixedDesktop ? referenceHeight : height;
@@ -724,7 +727,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const paintPlacesMotion = () => {
       placesMotionFrame = 0;
       const rect = placesStory.getBoundingClientRect();
-      const scrollable = placesStory.offsetHeight - document.documentElement.clientHeight;
+      const scrollable = placesStory.offsetHeight - designViewportHeight();
       const progress = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
       /* Give the scattered grid → portrait transition enough scroll
          distance to ease between both states without a sudden jump. */
@@ -833,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statementOpacity > 0.001) {
           /* Move the complete photo + copy group left. Keep Y locked to 0. */
-          aboutContent.style.transform = 'translate3d(-5vw,2vh,0)';
+          aboutContent.style.transform = 'translate3d(calc(var(--app-vw) * -5),calc(var(--app-vh) * 2),0)';
 
           const centeredPhotoRect = placesSlides.getBoundingClientRect();
           const centeredStatementRect = placesStatement.getBoundingClientRect();
@@ -1040,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateFromScroll = () => {
       ticking = false;
       const rect = wrapper.getBoundingClientRect();
-      const scrollable = wrapper.offsetHeight - document.documentElement.clientHeight;
+      const scrollable = wrapper.offsetHeight - designViewportHeight();
       if (scrollable <= 0) { setActive(0); return; }
       const rawProgress = Math.max(0, Math.min(1, -rect.top / scrollable));
       const progress = Math.max(0, Math.min(1,
@@ -1054,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scrollToIndex = (i) => {
       i = Math.max(0, Math.min(slides.length - 1, i));
-      const scrollable = wrapper.offsetHeight - document.documentElement.clientHeight;
+      const scrollable = wrapper.offsetHeight - designViewportHeight();
       const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
       const slideProgress = slides.length <= 1 ? 0 : i / (slides.length - 1);
       const adjustedProgress = progressStart + slideProgress * (progressEnd - progressStart);
@@ -1147,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!objectsScroll || !portfolioTitle) return;
 
     const rect = objectsScroll.getBoundingClientRect();
-    const scrollable = objectsScroll.offsetHeight - document.documentElement.clientHeight;
+    const scrollable = objectsScroll.offsetHeight - designViewportHeight();
     const progress = scrollable > 0
       ? Math.max(0, Math.min(1, -rect.top / scrollable))
       : 0;
@@ -1160,15 +1163,14 @@ document.addEventListener('DOMContentLoaded', () => {
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const viewportHeight = document.documentElement.clientHeight;
-    const layoutScale = fixedDesktop ? Math.min(viewportWidth / 1728, viewportHeight / 1000) : 1;
+    const layoutScale = fixedDesktop ? viewportWidth / 1728 : 1;
     const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(viewportWidth, 1728);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
-      : Math.max(referenceWidth * 0.78, 800);
+      : referenceWidth * 0.78;
     const cardSpacing = window.innerWidth <= 600
       ? referenceWidth * 0.23
-      : Math.max(referenceWidth * 0.2, 180);
+      : referenceWidth * 0.2;
 
     portfolioTitle.style.setProperty('--portfolio-progress', revealProgress.toFixed(4));
     portfolioTitle.style.setProperty('--portfolio-shift-left', `${-travel * revealProgress}px`);
@@ -1214,7 +1216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const depth = Math.abs(sequenceOrder);
         slide.style.visibility = 'visible';
         slide.style.setProperty('--object-card-opacity', '1');
-        slide.style.setProperty('--object-card-shift', '0vw');
+        slide.style.setProperty('--object-card-shift', '0px');
         slide.style.setProperty('--object-card-y', `${sequenceOrder * 17}vh`);
         slide.style.setProperty('--object-card-scale', (Math.max(.62, 1 - depth / 6) * .92).toFixed(4));
         slide.style.setProperty('--object-card-layer', String(sequenceOrder === 1 ? 0 : 20 - depth));
@@ -1260,7 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   objectMergeLink?.addEventListener('click', (event) => {
     event.preventDefault();
     if (!objectsScroll) return;
-    const scrollable = objectsScroll.offsetHeight - document.documentElement.clientHeight;
+    const scrollable = objectsScroll.offsetHeight - designViewportHeight();
     const gridProgress = .36;
     const targetTop = window.scrollY + objectsScroll.getBoundingClientRect().top + scrollable * gridProgress;
     window.scrollTo({ top: targetTop, behavior: 'smooth' });
