@@ -43,15 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = Math.round(document.documentElement.clientWidth);
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
     const layoutScale = fixedDesktop ? Math.min(width / 1728, height / 1000) : 1;
-    const referenceHeight = fixedDesktop ? 1000 : Math.min(height, 1000);
-    const referenceWidth = fixedDesktop ? 1728 : Math.min(width, 1728);
-    const layoutHeight = fixedDesktop ? 1000 : height;
-    const canvasGutter = fixedDesktop
-      ? Math.max(0, (width / layoutScale - 1728) / 2)
-      : 0;
-    root.style.setProperty('--canvas-scale', layoutScale.toFixed(6));
-    root.style.setProperty('--canvas-gutter', `${canvasGutter.toFixed(3)}px`);
-    root.style.setProperty('--layout-scale', fixedDesktop ? '1' : layoutScale.toFixed(6));
+    const referenceHeight = fixedDesktop ? 1000 * layoutScale : Math.min(height, 1000);
+    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(width, 1728);
+    const layoutHeight = fixedDesktop ? referenceHeight : height;
+    root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
     root.style.setProperty('--app-height', `${Math.round(layoutHeight)}px`);
     root.style.setProperty('--app-height-115', `${Math.round(layoutHeight * 1.15)}px`);
     root.style.setProperty('--app-vh', `${referenceHeight / 100}px`);
@@ -729,7 +724,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const paintPlacesMotion = () => {
       placesMotionFrame = 0;
       const rect = placesStory.getBoundingClientRect();
-      const scrollable = rect.height - document.documentElement.clientHeight;
+      const scrollable = placesStory.offsetHeight - document.documentElement.clientHeight;
       const progress = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
       /* Give the scattered grid → portrait transition enough scroll
          distance to ease between both states without a sudden jump. */
@@ -1045,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateFromScroll = () => {
       ticking = false;
       const rect = wrapper.getBoundingClientRect();
-      const scrollable = rect.height - document.documentElement.clientHeight;
+      const scrollable = wrapper.offsetHeight - document.documentElement.clientHeight;
       if (scrollable <= 0) { setActive(0); return; }
       const rawProgress = Math.max(0, Math.min(1, -rect.top / scrollable));
       const progress = Math.max(0, Math.min(1,
@@ -1059,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scrollToIndex = (i) => {
       i = Math.max(0, Math.min(slides.length - 1, i));
-      const scrollable = wrapper.getBoundingClientRect().height - document.documentElement.clientHeight;
+      const scrollable = wrapper.offsetHeight - document.documentElement.clientHeight;
       const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
       const slideProgress = slides.length <= 1 ? 0 : i / (slides.length - 1);
       const adjustedProgress = progressStart + slideProgress * (progressEnd - progressStart);
@@ -1152,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!objectsScroll || !portfolioTitle) return;
 
     const rect = objectsScroll.getBoundingClientRect();
-    const scrollable = rect.height - document.documentElement.clientHeight;
+    const scrollable = objectsScroll.offsetHeight - document.documentElement.clientHeight;
     const progress = scrollable > 0
       ? Math.max(0, Math.min(1, -rect.top / scrollable))
       : 0;
@@ -1165,7 +1160,9 @@ document.addEventListener('DOMContentLoaded', () => {
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const referenceWidth = fixedDesktop ? 1728 : Math.min(viewportWidth, 1728);
+    const viewportHeight = document.documentElement.clientHeight;
+    const layoutScale = fixedDesktop ? Math.min(viewportWidth / 1728, viewportHeight / 1000) : 1;
+    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(viewportWidth, 1728);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
       : Math.max(referenceWidth * 0.78, 800);
@@ -1263,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
   objectMergeLink?.addEventListener('click', (event) => {
     event.preventDefault();
     if (!objectsScroll) return;
-    const scrollable = objectsScroll.getBoundingClientRect().height - document.documentElement.clientHeight;
+    const scrollable = objectsScroll.offsetHeight - document.documentElement.clientHeight;
     const gridProgress = .36;
     const targetTop = window.scrollY + objectsScroll.getBoundingClientRect().top + scrollable * gridProgress;
     window.scrollTo({ top: targetTop, behavior: 'smooth' });

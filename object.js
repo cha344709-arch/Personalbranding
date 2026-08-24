@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const height = document.documentElement.clientHeight;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
     const layoutScale = fixedDesktop ? Math.min(width / 1728, height / 1000) : 1;
-    root.style.setProperty('--canvas-scale', layoutScale.toFixed(6));
-    root.style.setProperty('--layout-scale', fixedDesktop ? '1' : layoutScale.toFixed(6));
-    root.style.setProperty('--app-vw', fixedDesktop ? '17.28px' : `${width / 100}px`);
-    root.style.setProperty('--app-vh', fixedDesktop ? '10px' : `${height / 100}px`);
+    root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
+    root.style.setProperty('--app-vw', `${(1728 * layoutScale) / 100}px`);
+    root.style.setProperty('--app-vh', `${(1000 * layoutScale) / 100}px`);
   };
   syncObjectViewport();
   window.addEventListener('resize', syncObjectViewport);
