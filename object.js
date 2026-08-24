@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
     marshall: 'https://drive.google.com/file/d/1LwIDIBZg29SB01glA2GzUQUbcMfXY1ug/view?usp=sharing'
   };
   const deckLabels = {
-    viner: 'VINER장표보기',
-    marshall: 'MARSHALL장표보기'
+    viner: 'VINER장표 다운로드',
+    marshall: 'MARSHALL장표 다운로드'
   };
   const liveUrls = {
     'ai-in-app': 'https://ai-money-coach-recovered-final.vercel.app/'
