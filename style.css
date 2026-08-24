@@ -95,7 +95,7 @@
   --gap:    1rem;
   --pad:    2rem;
   --radius: .3rem;
-  --content-max:120rem;
+  --content-max:calc(var(--app-vw) * 111.1111);
   --reading-max:52rem;
 
   --f-cubic:      cubic-bezier(.35,.35,0,1);
@@ -105,24 +105,18 @@
   --ease: var(--f-smooth);
   --app-height:100vh;
   --app-height-115:115vh;
-  --app-vh:1vh;
-  --app-vw:1vw;
+  --app-vh:min(1vh,.5787037vw);
+  --app-vw:min(1vw,1.728vh);
+  --layout-scale:1;
 }
 
 @media (hover:none) and (max-width:768px){ :root{ --pad:1.25rem; } }
 @media (hover:none) and (max-width:430px){ :root{ --pad:1rem; } }
 
-/* Desktop is a fixed 16-inch design canvas. Larger displays only gain
-   surrounding space; smaller desktop viewports scroll instead of scaling. */
-@media (hover:hover) and (pointer:fine){
-  :root{--app-vw:17.28px;--app-vh:10px;}
-  html,body{min-width:108rem;}
-}
-
 *{box-sizing:border-box;}
 html{
   scroll-behavior:auto;
-  font-size:16px;
+  font-size:calc(16px * var(--layout-scale));
   -webkit-text-size-adjust:100%;
   text-size-adjust:100%;
   font-synthesis:none;
@@ -515,7 +509,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 /* ---------- scroll-pin (Places / Objects scroll-driven carousels) ---------- */
 .scroll-pin{position:relative;height:calc(var(--slides) * 90vh);}
 .scroll-pin__sticky{
-  position:sticky;top:0;width:min(100%,108rem);height:var(--app-height);margin-inline:auto;display:flex;flex-direction:column;
+  position:sticky;top:0;width:min(100%,calc(var(--app-vw) * 100));height:var(--app-height);margin-inline:auto;display:flex;flex-direction:column;
   align-items:center;justify-content:center;overflow:hidden;isolation:isolate;
 }
 @media (hover:none) and (max-width:768px){

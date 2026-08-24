@@ -42,16 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const referenceHeight = fixedDesktop ? 1000 : Math.min(height, 1000);
-    const referenceWidth = fixedDesktop ? 1728 : Math.min(width, 1728);
-    root.style.setProperty('--app-height', `${height}px`);
-    root.style.setProperty('--app-height-115', `${Math.round(height * 1.15)}px`);
+    const layoutScale = fixedDesktop ? Math.min(width / 1728, height / 1000) : 1;
+    const referenceHeight = fixedDesktop ? 1000 * layoutScale : Math.min(height, 1000);
+    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(width, 1728);
+    const layoutHeight = fixedDesktop ? referenceHeight : height;
+    root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
+    root.style.setProperty('--app-height', `${Math.round(layoutHeight)}px`);
+    root.style.setProperty('--app-height-115', `${Math.round(layoutHeight * 1.15)}px`);
     root.style.setProperty('--app-vh', `${referenceHeight / 100}px`);
     root.style.setProperty('--app-vw', `${referenceWidth / 100}px`);
     document.querySelectorAll('.scroll-pin').forEach((pin) => {
       const slides = Number.parseFloat(getComputedStyle(pin).getPropertyValue('--slides')) || 1;
       const multiplier = window.innerWidth <= 768 ? 0.65 : 0.9;
-      pin.style.height = `${Math.round(slides * multiplier * height)}px`;
+      pin.style.height = `${Math.round(slides * multiplier * layoutHeight)}px`;
     });
   };
 
@@ -1157,7 +1160,9 @@ document.addEventListener('DOMContentLoaded', () => {
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const referenceWidth = fixedDesktop ? 1728 : Math.min(viewportWidth, 1728);
+    const viewportHeight = document.documentElement.clientHeight;
+    const layoutScale = fixedDesktop ? Math.min(viewportWidth / 1728, viewportHeight / 1000) : 1;
+    const referenceWidth = fixedDesktop ? 1728 * layoutScale : Math.min(viewportWidth, 1728);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
       : Math.max(referenceWidth * 0.78, 800);
