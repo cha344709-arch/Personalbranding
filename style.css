@@ -113,6 +113,31 @@
 @media (hover:none) and (max-width:768px){ :root{ --pad:1.25rem; } }
 @media (hover:none) and (max-width:430px){ :root{ --pad:1rem; } }
 
+@media (hover:hover) and (pointer:fine){
+  :root{
+    --app-vw:17.28px;
+    --app-vh:10px;
+    --app-height:1000px;
+    --app-height-115:1150px;
+    --layout-scale:1;
+  }
+  body{overflow-x:hidden;}
+  .site-scale-shell{
+    width:1728px;
+    margin-inline:auto;
+    zoom:var(--canvas-scale,1);
+  }
+  .site-header{
+    width:1728px;
+    zoom:var(--canvas-scale,1);
+  }
+  .object-page .object-detail{
+    width:1728px;
+    max-width:none;
+    zoom:var(--canvas-scale,1);
+  }
+}
+
 *{box-sizing:border-box;}
 html{
   scroll-behavior:auto;
