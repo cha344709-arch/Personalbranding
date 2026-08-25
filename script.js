@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
   const DESIGN_WIDTH = 1920;
   const DESIGN_HEIGHT = 1080;
+  const ORIGINAL_TYPE_WIDTH = 1728;
   const designViewportHeight = () => Number.parseFloat(
     getComputedStyle(root).getPropertyValue('--app-height')
   ) || document.documentElement.clientHeight;
@@ -47,11 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
-    const referenceHeight = fixedDesktop ? DESIGN_HEIGHT * layoutScale : Math.min(height, DESIGN_HEIGHT);
-    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * layoutScale : Math.min(width, DESIGN_WIDTH);
+    const geometryScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
+    const typeScale = fixedDesktop ? width / ORIGINAL_TYPE_WIDTH : 1;
+    const referenceHeight = fixedDesktop ? DESIGN_HEIGHT * geometryScale : Math.min(height, DESIGN_HEIGHT);
+    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * geometryScale : Math.min(width, DESIGN_WIDTH);
     const layoutHeight = fixedDesktop ? referenceHeight : height;
-    root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
+    root.style.setProperty('--layout-scale', typeScale.toFixed(6));
     root.style.setProperty('--app-height', `${Math.round(layoutHeight)}px`);
     root.style.setProperty('--app-height-115', `${Math.round(layoutHeight * 1.15)}px`);
     root.style.setProperty('--app-vh', `${referenceHeight / 100}px`);
@@ -1165,8 +1167,8 @@ document.addEventListener('DOMContentLoaded', () => {
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? viewportWidth / DESIGN_WIDTH : 1;
-    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * layoutScale : Math.min(viewportWidth, DESIGN_WIDTH);
+    const geometryScale = fixedDesktop ? viewportWidth / DESIGN_WIDTH : 1;
+    const referenceWidth = fixedDesktop ? DESIGN_WIDTH * geometryScale : Math.min(viewportWidth, DESIGN_WIDTH);
     const travel = window.innerWidth <= 600
       ? referenceWidth * 0.92
       : referenceWidth * 0.78;

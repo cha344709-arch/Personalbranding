@@ -2,14 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
   const DESIGN_WIDTH = 1920;
   const DESIGN_HEIGHT = 1080;
+  const ORIGINAL_TYPE_WIDTH = 1728;
   const syncObjectViewport = () => {
     const width = document.documentElement.clientWidth;
     const height = document.documentElement.clientHeight;
     const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    const layoutScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
-    root.style.setProperty('--layout-scale', layoutScale.toFixed(6));
-    root.style.setProperty('--app-vw', `${(DESIGN_WIDTH * layoutScale) / 100}px`);
-    root.style.setProperty('--app-vh', `${(DESIGN_HEIGHT * layoutScale) / 100}px`);
+    const geometryScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
+    const typeScale = fixedDesktop ? width / ORIGINAL_TYPE_WIDTH : 1;
+    root.style.setProperty('--layout-scale', typeScale.toFixed(6));
+    root.style.setProperty('--app-vw', `${(DESIGN_WIDTH * geometryScale) / 100}px`);
+    root.style.setProperty('--app-vh', `${(DESIGN_HEIGHT * geometryScale) / 100}px`);
   };
   syncObjectViewport();
   window.addEventListener('resize', syncObjectViewport);
