@@ -1159,10 +1159,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ? Math.max(0, Math.min(1, -rect.top / scrollable))
       : 0;
 
-    /* The reference uses two independent sticky stories: 40% reveal, 60% stack. */
-    const revealProgress = clamp01(progress / .4);
-    const stackProgress = clamp01((progress - .4) / .6);
-    const isStack = progress >= .4;
+    /* Hold the centered PORTFOLIO composition on entry before any cards
+       reveal. This prevents restored/anchor scroll positions from entering
+       the story with PORT and FOLIO already split apart. */
+    const introHoldEnd = .14;
+    const revealEnd = .48;
+    const revealProgress = clamp01((progress - introHoldEnd) / (revealEnd - introHoldEnd));
+    const stackProgress = clamp01((progress - revealEnd) / (1 - revealEnd));
+    const isStack = progress >= revealEnd;
     /* Keep the 1920/2048px reference composition, but stop ultrawide
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
