@@ -789,7 +789,8 @@ document.addEventListener('DOMContentLoaded', () => {
          viewport, leaving nowhere for the text to sit but on top of it. */
       const maxExpandedWidth = Math.max(300, availableWidth - 480);
       const expandedWidth = Math.min(carouselWidth * expandedScale, maxExpandedWidth);
-      const expandedHeight = placesBaseSlidesHeight * expandedScale;
+      const maxExpandedHeight = designViewportHeight() * 0.68;
+      const expandedHeight = Math.min(placesBaseSlidesHeight * expandedScale, maxExpandedHeight);
       const finalWidth = Math.min(carouselWidth, Math.max(220, Math.min(320, availableWidth * 0.16)));
       const finalHeight = Math.min(placesBaseSlidesHeight * 1.2, Math.max(340, Math.min(520, document.documentElement.clientHeight * 0.45)));
       const currentWidth = expandedWidth + shrinking * (finalWidth - expandedWidth);
