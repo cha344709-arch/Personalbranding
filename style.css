@@ -700,13 +700,10 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .places-after__head .section__title span:nth-child(2){margin-left:0;}
 .places-after__head .section__title span:nth-child(3){margin-left:0;}
 .title-highlight{
-  display:inline-flex;align-items:center;justify-content:center;padding:.1em .14em;
-  background:var(--c-black);color:var(--c-yellow);font-style:normal;line-height:1;
-}
-.objects .title-highlight{
   display:inline-grid;
   place-items:center;
   padding:.08em .18em .14em;
+  background:var(--c-black);color:var(--c-yellow);font-style:normal;
   line-height:1;
   vertical-align:middle;
 }
