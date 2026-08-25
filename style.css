@@ -38,23 +38,23 @@
   font-weight:400;
   font-display:swap;
 }
-/* Pretendard, restricted to Hangul via unicode-range so it only ever
+/* NEXON Lv2 Gothic, restricted to Hangul via unicode-range so it only ever
    kicks in for Korean characters — English text keeps falling through
    to Switzer/OTJubilee/Voyage exactly as before. Prepended onto every
    --font-* stack below rather than swapped in, for the same reason. */
 @font-face{
-  font-family:"Pretendard";
-  src:url("fonts/Pretendard-Regular.woff2") format("woff2");
+  font-family:"NEXON Lv2 Gothic";
+  src:url("fonts/NEXON-Lv2-Gothic.woff") format("woff");
   font-style:normal;
   font-weight:400;
   font-display:swap;
   unicode-range:U+AC00-D7A3,U+1100-11FF,U+3130-318F,U+A960-A97F,U+D7B0-D7FF;
 }
 @font-face{
-  font-family:"Pretendard-Medium";
-  src:url("fonts/Pretendard-Medium.woff2") format("woff2");
+  font-family:"NEXON Lv2 Gothic Bold";
+  src:url("fonts/NEXON-Lv2-Gothic-Bold.woff") format("woff");
   font-style:normal;
-  font-weight:500;
+  font-weight:400;
   font-display:swap;
   unicode-range:U+AC00-D7A3,U+1100-11FF,U+3130-318F,U+A960-A97F,U+D7B0-D7FF;
 }
@@ -76,10 +76,10 @@
   --line:      rgba(159,175,155,.28);
   --accent:    var(--c-brown);
 
-  --font-b-regular:"Pretendard","Switzer-Regular",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --font-b-medium:"Pretendard-Medium","Switzer-Medium",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --font-t-1:"Pretendard","OTJubilee-Platinum",Georgia,"Times New Roman",serif;
-  --font-t-2:"Pretendard","Voyage-Regular",Georgia,"Times New Roman",serif;
+  --font-b-regular:"NEXON Lv2 Gothic","Switzer-Regular",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-b-medium:"NEXON Lv2 Gothic Bold","Switzer-Medium",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-t-1:"NEXON Lv2 Gothic","OTJubilee-Platinum",Georgia,"Times New Roman",serif;
+  --font-t-2:"NEXON Lv2 Gothic","Voyage-Regular",Georgia,"Times New Roman",serif;
 
   --fs-mm: .68rem;
   --fs-m:  .82rem;
@@ -700,9 +700,10 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .places-after__head .section__title span:nth-child(2){margin-left:0;}
 .places-after__head .section__title span:nth-child(3){margin-left:0;}
 .title-highlight{
-  display:inline-grid;
-  place-items:center;
-  padding:.08em .18em .14em;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.14em .18em .08em;
   background:var(--c-black);color:var(--c-yellow);font-style:normal;
   line-height:1;
   vertical-align:middle;
