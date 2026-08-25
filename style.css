@@ -408,7 +408,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
   text-align:center;white-space:nowrap;transform:translateX(-50%);
 }
 .hero__caption--left{
-  position:absolute;top:44%;left:calc(50% - clamp(26rem,calc(var(--app-vw) * 32),38rem) + calc(var(--app-vw) * 7));z-index:2;
+  position:absolute;top:47%;left:calc(50% - clamp(26rem,calc(var(--app-vw) * 32),38rem) + calc(var(--app-vw) * 7));z-index:2;
   font-family:var(--font-b-regular);font-size:var(--fs-mm);color:var(--c-black);text-align:left;line-height:1.4;
 }
 .hero__coordinates::before,.hero__coordinates::after{display:none;content:none;}
