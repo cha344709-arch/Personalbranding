@@ -703,6 +703,13 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
   display:inline-flex;align-items:center;justify-content:center;padding:.1em .14em;
   background:var(--c-black);color:var(--c-yellow);font-style:normal;line-height:1;
 }
+.objects .title-highlight{
+  display:inline-grid;
+  place-items:center;
+  padding:.08em .18em .14em;
+  line-height:1;
+  vertical-align:middle;
+}
 .places-after__body{
   position:absolute;top:54%;left:calc(var(--app-vw) * 10);z-index:1;
   width:min(calc(var(--app-vw) * 42),40.625rem);max-width:none;margin:0;text-align:left;
