@@ -966,7 +966,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .updates__grid.is-dragging{cursor:grabbing;}
 .updates__grid.is-dragging .updates__card{transition:none;}
 .updates__card{
-  position:absolute;top:50%;left:50%;width:min(calc(var(--app-vw) * 62),52rem);margin:0;aspect-ratio:3/2;
+  position:absolute;top:50%;left:50%;width:min(calc(var(--app-vw) * 54),44rem);margin:0;aspect-ratio:3/2;
   border-radius:var(--radius);overflow:hidden;background:#fff;opacity:.55;
   transition:transform .8s var(--f-cubic),opacity .8s var(--f-cubic),box-shadow .8s var(--f-cubic);
   will-change:transform;
