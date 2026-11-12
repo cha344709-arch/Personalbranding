@@ -909,7 +909,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .objects__merge-copy{position:absolute;margin:0;text-transform:none;line-height:1.25;}
 .objects__merge-copy--left-top{top:22%;left:2.6%;font-family:var(--font-b-medium);font-size:clamp(.9rem,calc(var(--app-vw) * 1.35),1.55rem);text-transform:uppercase;}
 .objects__merge-copy--right{top:43%;right:1.2%;font-family:var(--font-b-medium);font-size:clamp(.75rem,calc(var(--app-vw) * 1.05),1.2rem);text-align:right;text-transform:uppercase;}
-.objects__merge-copy--left-bottom{left:10.5%;bottom:25%;max-width:26%;font-size:clamp(.8rem,calc(var(--app-vw) * 1.05),1.15rem);}
+.objects__merge-copy--left-bottom{left:10.5%;bottom:25%;max-width:26%;font-size:15px;}
 .objects__merge-name{
   position:absolute;left:15%;top:50%;width:70%;height:1px;background:rgba(21,20,21,.2);
   font-family:var(--font-t-1);font-size:clamp(1.6rem,calc(var(--app-vw) * 2.2),2.8rem);
