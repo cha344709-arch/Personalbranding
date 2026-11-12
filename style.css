@@ -788,7 +788,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .objects__title-lines > span{display:block;white-space:nowrap;}
 .objects__photo{
   position:absolute;top:clamp(9rem,calc(var(--app-vw) * 14),13rem);left:max(calc(var(--app-vw) * 6),calc((calc(var(--app-vw) * 100) - var(--content-max))/2 + var(--pad)));
-  z-index:1;width:min(calc(var(--app-vw) * 38),34rem);height:auto;object-fit:cover;border-radius:.4rem;
+  z-index:1;width:min(calc(var(--app-vw) * 30),26rem);height:auto;object-fit:cover;border-radius:.4rem;
 }
 .objects__portfolio-title{
   --portfolio-progress:0;
