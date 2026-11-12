@@ -47,7 +47,7 @@
   src:url("fonts/NEXON-Lv2-Gothic.woff") format("woff");
   font-style:normal;
   font-weight:400;
-  font-display:swap;
+  font-display:block;
   unicode-range:U+AC00-D7A3,U+1100-11FF,U+3130-318F,U+A960-A97F,U+D7B0-D7FF;
 }
 @font-face{
@@ -55,7 +55,7 @@
   src:url("fonts/NEXON-Lv2-Gothic-Bold.woff") format("woff");
   font-style:normal;
   font-weight:400;
-  font-display:swap;
+  font-display:block;
   unicode-range:U+AC00-D7A3,U+1100-11FF,U+3130-318F,U+A960-A97F,U+D7B0-D7FF;
 }
 
@@ -700,26 +700,37 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 .places-after__head .section__title span:nth-child(2){margin-left:0;}
 .places-after__head .section__title span:nth-child(3){margin-left:0;}
 .title-highlight{
-  position:relative;
-  isolation:isolate;
-  display:inline-block;
-  padding:.14em .18em .08em;
+  display:inline-grid;
+  place-items:center;
+  width:max-content;
+  height:1.2em;
+  padding:0 .2em;
+  box-sizing:border-box;
+  background:var(--c-black);
   color:var(--c-yellow);font-style:normal;
   line-height:1;
-  vertical-align:baseline;
+  text-align:center;
+  vertical-align:middle;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
 }
-.title-highlight::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:var(--c-black);
-  transform:translateY(.12em);
+.title-highlight > span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  line-height:1;
+  text-align:center;
 }
+
 .places-after__body{
   position:absolute;top:54%;left:calc(var(--app-vw) * 10);z-index:1;
   width:min(calc(var(--app-vw) * 42),40.625rem);max-width:none;margin:0;text-align:left;
 }
+
 .places-after__lede{font-family:var(--font-b-medium);font-size:1rem;letter-spacing:.02em;margin:0 0 1em;}
 .places-after__lede{
   position:relative;left:auto;bottom:auto;
