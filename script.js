@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     viewportFrame = 0;
     const height = Math.round(document.documentElement.clientHeight);
     const width = Math.round(document.documentElement.clientWidth);
-    const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    /* Use viewport width—not mouse/touch capability—to choose the layout.
+       Touch-enabled Windows laptops must keep the same desktop geometry as Macs. */
+    const fixedDesktop = width > 900;
     const geometryScale = fixedDesktop ? width / DESIGN_WIDTH : 1;
     const typeScale = fixedDesktop ? width / ORIGINAL_TYPE_WIDTH : 1;
     const referenceHeight = fixedDesktop ? DESIGN_HEIGHT * geometryScale : Math.min(height, DESIGN_HEIGHT);
@@ -1171,7 +1173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Keep the 1920/2048px reference composition, but stop ultrawide
        monitors from multiplying the card/title travel without a limit. */
     const viewportWidth = document.documentElement.clientWidth;
-    const fixedDesktop = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const fixedDesktop = viewportWidth > 900;
     const geometryScale = fixedDesktop ? viewportWidth / DESIGN_WIDTH : 1;
     const referenceWidth = fixedDesktop ? DESIGN_WIDTH * geometryScale : Math.min(viewportWidth, DESIGN_WIDTH);
     const travel = window.innerWidth <= 600
