@@ -994,7 +994,7 @@ input,textarea{font-family:var(--font-t-2);font-size:1.05rem;}
 }
 .updates__giant{
   position:absolute;top:clamp(3.5rem,calc(var(--app-vw) * 6),6rem);left:50%;transform:translateX(-50%);
-  font-family:var(--font-t-1);font-size:clamp(3rem,calc(var(--app-vw) * 10),8rem);color:rgba(21,20,21,.12);white-space:nowrap;z-index:0;
+  font-family:var(--font-t-1);font-size:clamp(3rem,calc(var(--app-vw) * 10),8rem);color:rgba(21,20,21,.07);white-space:nowrap;z-index:0;
 }
 .updates .section__head{text-align:center;margin-inline:auto;margin-top:clamp(3rem,calc(var(--app-vw) * 5),5rem);position:relative;z-index:1;}
 .updates__grid{position:relative;z-index:1;height:clamp(20rem,calc(var(--app-vw) * 34),36rem);overflow:hidden;margin-bottom:1.25rem;cursor:grab;touch-action:pan-y;user-select:none;}
